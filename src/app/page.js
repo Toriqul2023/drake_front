@@ -1,6 +1,6 @@
 import Image from "next/image"
 import React from "react"
-import Introduce from "./Components/Intoduce/introduce"
+import Introduce from "./Components/Introduce/introduce"
 import About from "./Components/About/About"
 import Services from "./Components/Services/Services"
 import Portfolio from "./Components/Portfolio/Portfolio"

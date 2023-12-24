@@ -12,13 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className} >
-        <video class="body-overlay"
-         loop
-         autoPlay
-         muted
- >
-        <source src={"https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video5.mp4"} type="video/mp4"/>
-</video>{children}</body>
+     {children}</body>
     </html>
   )
 }

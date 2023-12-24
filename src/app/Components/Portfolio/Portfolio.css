@@ -1,0 +1,7 @@
+.hovering{
+    transition: 3s;
+}
+.hovering:hover ~ button{
+    background-color: #1F1F1F;
+    color: white;
+}

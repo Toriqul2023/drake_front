@@ -15,7 +15,7 @@ export default function Home() {
  >
         <source src={"https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video5.mp4"} type="video/mp4"/>
 </video>
-       <div className="row grid grid-cols-4 py-[100px] px-5">
+       <div className="row grid grid-cols-4 py-[100px] px-5 pt-[0px]">
             <div>
               <div className="fixed  border w-[400px] rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
               <div className="flex justify-between items-center py-5">

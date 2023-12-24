@@ -4,7 +4,7 @@ import './Introduce.css'
 
 const Introduce = () => {
   return (
-    <div >
+    <>
       <div className='mb-[115px]'>
       <button className="border text-[14px] rounded-3xl py-2  px-5">INTRODUCE</button>
          <div className=''>
@@ -36,7 +36,7 @@ const Introduce = () => {
          </div>
       </div>
          
-    </div>
+    </>
   )
 }
 

@@ -22,14 +22,3 @@ body {
   background: #1F1F1F;
   /* background-color: black; */
 }
-.body-overlay{
-  opacity: 2;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-
-}

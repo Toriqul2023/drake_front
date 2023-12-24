@@ -1,9 +1,10 @@
 import Image from "next/image"
 import React from "react"
 import Introduce from "./Components/Introduce/Introduce"
-import About from "./Components/About/About"
+
 import Services from "./Components/Services/Services"
 import Portfolio from "./Components/Portfolio/Portfolio"
+import Abouts from "./Components/Abouts/Abouts"
 
 export default function Home() {
   return (
@@ -34,7 +35,7 @@ export default function Home() {
         <div className="col-span-2 pl-[200px]"> 
          
         <Introduce/> 
-        <About/>
+        <Abouts/>
         <Services/>
         <Portfolio/>
      

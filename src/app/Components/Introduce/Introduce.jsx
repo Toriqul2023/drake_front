@@ -18,14 +18,14 @@ const Introduce = () => {
            
             <div className='flex w-[500px] justify-between'>
               <div>
-                 <h3 className='text-5xl  text-[#28E98C]'>10+</h3>
+                 <h3 className='text-5xl  text-[#28E98C]'>3+</h3>
                  <p className='text-gray-400 text-[14px] mt-3'>
                  YEARS OF
                  EXPERIENCE         
                  </p>
               </div>
               <div>
-                 <h3 className='text-5xl text-[#28E98C]'>182+</h3>
+                 <h3 className='text-5xl text-[#28E98C]'>5+</h3>
                  <p className='text-gray-400 text-[14px] mt-3'>
                  PROJECTS COMPLETED ON LOCALS
                  </p>

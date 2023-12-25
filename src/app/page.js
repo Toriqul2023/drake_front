@@ -5,11 +5,12 @@ import Introduce from "./Components/Introduce/Introduce"
 import Services from "./Components/Services/Services"
 import Portfolio from "./Components/Portfolio/Portfolio"
 import Abouts from "./Components/Abouts/Abouts"
+import Experience from "./Components/Experience/Experience"
 
 export default function Home() {
   return (
     <>
-       <video class="body-overlay" loop muted autoPlay >
+       <video className="body-overlay" loop muted autoPlay >
         <source src="https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video5.mp4" type="video/mp4"/>
 </video>
        <div className="row grid grid-cols-4 py-[100px] px-5 ">
@@ -38,8 +39,10 @@ export default function Home() {
          
         <Introduce/> 
         <Abouts/>
+        <Experience/>
         <Services/>
         <Portfolio/>
+        
      
         </div>
         <div>

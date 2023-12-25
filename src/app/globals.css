@@ -19,6 +19,17 @@
 body {
   color: white;
   scroll-behavior: smooth;
-  background: #1F1F1F;
-  /* background-color: black; */
+  /* background: #1F1F1F; */
+  background-color: black;
+ 
+}
+body .body-overlay {
+  opacity: 0.3;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }

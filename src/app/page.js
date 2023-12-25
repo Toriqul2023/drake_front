@@ -9,7 +9,9 @@ import Abouts from "./Components/Abouts/Abouts"
 export default function Home() {
   return (
     <>
-       
+       <video class="body-overlay" loop muted autoPlay >
+        <source src="https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video5.mp4" type="video/mp4"/>
+</video>
        <div className="row grid grid-cols-4 py-[100px] px-5 ">
             <div>
               <div className="fixed  border w-[400px] rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">

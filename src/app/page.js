@@ -64,7 +64,7 @@ export default function Home() {
         
      
         </div>
-        <div className=" p-5 pt-[100px] flex justify-end">
+        <div className=" absolute top-[20%]  right-[10px] p-5 pt-[100px] flex justify-end">
           <div className="menu w-[50px] py-[20px] px-5 border-[#575757]  rounded-3xl fixed border items-center justify-center">
             
 
@@ -96,11 +96,13 @@ export default function Home() {
             </div>
             <div className="mx-[auto] ">
             <Link href='#Portfolio'>
-            <FontAwesomeIcon style={{marginLeft:'-3px',color:'#9CA3AF'}}
+            <FontAwesomeIcon style={{marginLeft:'-4px',marginBottom:'20px',color:'#9CA3AF'}}
         icon={faBoxesStacked}
         
       /></Link>
             </div>
+         
+          
            
      
           

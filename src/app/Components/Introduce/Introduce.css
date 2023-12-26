@@ -6,6 +6,9 @@
     left: 23px;
     animation: spin 6s infinite linear;
 }
+#home:hover > #homeicon{
+    color:red;
+}
 @keyframes spin { 
     from { 
         transform: rotate(0deg); 

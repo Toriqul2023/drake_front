@@ -3,7 +3,7 @@ import React from 'react'
 const Services = () => {
   return (
     <>
-    <div className='mb-[150px]'>
+    <div className='mb-[150px] py-5' id="Service">
     <button className="border text-[14px] rounded-3xl mb-[20px] py-2  px-5">SERVICES</button>
     <h1 className='text-6xl my-3 mb-[50px] font-light'>My <span className='text-[#28E98C]'>Specializations</span> </h1>
     <div className='border border-[#565656] rounded-3xl my-4 pl-[30px] pt-[40px] pb-[30px]   hover:border-[#28E98C]'>

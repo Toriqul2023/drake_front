@@ -7,15 +7,28 @@ import Portfolio from "./Components/Portfolio/Portfolio"
 import Abouts from "./Components/Abouts/Abouts"
 import Experience from "./Components/Experience/Experience"
 
+import {
+ faFacebook,
+  faUser,
+  faFaceSadCry,
+  faFile,
+  faBarsStaggered,
+  faBoxesStacked,
+  faHome,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Link from "next/link"
+
 export default function Home() {
   return (
     <>
        <video className="body-overlay" loop muted autoPlay >
-        <source src="https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video5.mp4" type="video/mp4"/>
+        <source src="https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video4.mp4" type="video/mp4"/>
 </video>
-       <div className="row grid grid-cols-4 py-[100px] px-5 ">
-            <div>
-              <div className="fixed  border w-[400px] rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
+  {/* <div className="h-[100px]"></div> */}
+       <div className="row grid grid-cols-4  px-5 ">
+            <div className="pt-[50px]">
+              <div className="fixed border w-[400px] rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
               <div className="flex justify-between items-center py-5">
                   <h1 className="text-4xl">Toriqul</h1>
                   <p className=""> Developer</p>
@@ -24,10 +37,16 @@ export default function Home() {
                 <div className="text-center w-[100%]">
                 <h3 className="text-2xl ">hello@toriqul.design</h3>
                             <h3 className="text-2xl pb-[40px]">Based in Tejgaon, Dhaka</h3>  
-                            <p className="text-gray-400 pb-[30px]">© 2024 Toriqul. All Rights Reserved</p>  
+                            <p className="text-gray-400 pb-[20px]">© 2024 Toriqul. All Rights Reserved</p>  
                           
-                      
-                            <button className=" rounded-3xl bg-[#28E98C] px-[35%] py-3">HIRE ME!</button>
+                             <ul className="flex justify-evenly my-[20px]  gap-3">
+                               <li className="border-2 border-[#565656] p-4 rounded-full"><Link href={'/'} className="">   <FontAwesomeIcon  id="homeicon" style={{fontSize:'28px',color:'#9CA3AF'}}  icon={faFaceSadCry}   /></Link></li>
+                               <li className="border-2 border-[#565656] p-4 rounded-full"><Link href={'/'} className=""> <FontAwesomeIcon style={{fontSize:'28px',color:'#9CA3AF'}}  icon={faFaceSadCry}   /></Link></li>
+                               <li className="border-2 border-[#565656] p-4 rounded-full"><Link href={'/'} className=""> <FontAwesomeIcon style={{fontSize:'28px',color:'#9CA3AF'}}  icon={faFaceSadCry}   /></Link></li>
+                               <li className="border-2 border-[#565656] p-4 rounded-full"><Link href={'/'} className=""> <FontAwesomeIcon style={{fontSize:'28px',color:'#9CA3AF'}}  icon={faFaceSadCry}   /></Link></li>
+                               <li className="border-2 border-[#565656] p-4 rounded-full"><Link href={'/'} className=""> <FontAwesomeIcon style={{fontSize:'28px',color:'#9CA3AF'}}  icon={faFaceSadCry}   /></Link></li>
+                             </ul>
+                            <button className=" rounded-3xl bg-[#28E98C] px-[35%] py-3 text-black">HIRE ME!</button>
                 </div>
                       
               </div>
@@ -45,8 +64,49 @@ export default function Home() {
         
      
         </div>
-        <div>
+        <div className=" p-5 pt-[100px] flex justify-end">
+          <div className="menu w-[50px] py-[20px] px-5 border-[#575757]  rounded-3xl fixed border items-center justify-center">
+            
+
+            <div className="mx-[auto] ">
+            <Link href='#Home'><FontAwesomeIcon style={{marginLeft:'-5px',marginBottom:'20px',color:'#9CA3AF'}}
+        icon={faHome}
+        
+      /></Link>
+            </div>
+            <div className="mx-[auto] ">
+            <Link href='#About'><FontAwesomeIcon style={{marginLeft:'-4px',marginBottom:'20px',color:'#9CA3AF'}}
+        icon={faUser}
+        
+      /></Link>
+            </div>
+            <div className="mx-[auto] ">
+            <Link href='#Resume'>
+            <FontAwesomeIcon style={{marginLeft:'-4px',marginBottom:'20px',color:'#9CA3AF'}}
+        icon={faFile}
+        
+      /></Link>
+            </div>
+            <div className="mx-[auto] ">
+            <Link href='#Service'>
+            <FontAwesomeIcon style={{marginLeft:'-4px',marginBottom:'20px',color:'#9CA3AF'}}
+        icon={faBarsStaggered}
+        
+      /></Link>
+            </div>
+            <div className="mx-[auto] ">
+            <Link href='#Portfolio'>
+            <FontAwesomeIcon style={{marginLeft:'-3px',color:'#9CA3AF'}}
+        icon={faBoxesStacked}
+        
+      /></Link>
+            </div>
+           
+     
           
+       
+   
+          </div>
         </div>
        </div>
      </>

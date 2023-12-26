@@ -3,7 +3,7 @@ import React from 'react'
 const Abouts = () => {
   return (
     <>
-    <div className='mb-[150px]'>
+    <div className='mb-[150px] py-5' id="About">
         <button className="border text-[14px] rounded-3xl py-2  px-5">ABOUT</button>
         <div>
             <h1 className='text-[50px] mt-[50px] mb-5 font-light'>Every great design begin with

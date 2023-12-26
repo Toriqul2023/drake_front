@@ -4,7 +4,7 @@ import './Experience.css'
 const Experience = () => {
   return (
     <>
-    <div className='mb-[200px]'>
+    <div className='mb-[200px] py-5' id="Resume">
            <button className="border border-[#565656] text-[14px] rounded-3xl mb-[20px] py-2  px-5">RESUME</button>
            <h1 className='text-6xl my-5 mb-[50px] font-light'>Work <span className='text-[#28E98C]'>Experience</span> </h1>
            <div className='pl-[80px] pb-5 border-l border-[#565656] relative'>

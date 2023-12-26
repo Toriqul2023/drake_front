@@ -15,12 +15,15 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+html{
+  scroll-behavior: smooth;
+}
 
 body {
   color: white;
   scroll-behavior: smooth;
-  /* background: #1F1F1F; */
-  background-color: black;
+  background: #1F1F1F;
+  /* background-color: black; */
  
 }
 body .body-overlay {

@@ -14,7 +14,7 @@ const Introduce = () => {
       <button className="border text-[14px] rounded-3xl py-2  px-5 "><FontAwesomeIcon style={{marginRight:'5px'}} icon={faHouse} /> 
       INTRODUCE</button>
          <div className=''>
-            <h1 className='text-[70px] mb-5 font-light'> Say Hi from <span className='text-[#28E98C]'>Toriqul</span>, Webflow Designer and Developer</h1>
+            <h1 className='lg:text-[70px] text-[30px] mb-5 font-light'> Say Hi from <span className='text-[#28E98C]'>Toriqul</span>, Webflow Designer and Developer</h1>
             <p className='max-w-[488px] text-gray-400 my-5 mb-[50px]'>I design and code beautifully simple things and i love what i do. Just simple like that!</p>
             
             <div className="border ml-[auto] mr-[20px] mb-[20px] rounded-full relative w-[175px] h-[175px] flex items-center  relative">

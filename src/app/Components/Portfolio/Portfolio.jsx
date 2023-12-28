@@ -7,7 +7,7 @@ const Portfolio = () => {
     <>
     <div className='mb-[115px] py-5' id="Portfolio">
     <button className="border text-[14px] rounded-3xl mb-[20px] py-2  px-5">PORTFOLIO</button>
-    <h1 className='text-6xl my-5 mb-[50px] font-light'>Featured <span className='text-[#28E98C]'>Projects</span> </h1>
+    <h1 className='lg:text-6xl my-5 mb-[50px] font-light'>Featured <span className='text-[#28E98C]'>Projects</span> </h1>
             <div className='projects-img '>
                 <div className='relative text-black'>
                 <Image className='hovering  w-[850px] rounded-3xl' src={'https://wpriverthemes.com/drake/wp-content/uploads/2023/03/portfolio1.jpg'} height={500} width={500} />

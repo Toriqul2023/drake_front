@@ -23,6 +23,7 @@ body {
   color: white;
   scroll-behavior: smooth;
   background: #1F1F1F;
+  overflow-x: hidden;
   /* background-color: black; */
  
 }

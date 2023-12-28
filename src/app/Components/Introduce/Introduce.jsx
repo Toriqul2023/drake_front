@@ -22,7 +22,7 @@ const Introduce = () => {
             </div>
            
            
-            <div className='flex w-[500px] justify-between'>
+            <div className='flex lg:w-[500px] justify-between'>
               <div>
                  <h3 className='text-5xl  text-[#28E98C]'>3+</h3>
                  <p className='text-gray-400 text-[14px] mt-3'>

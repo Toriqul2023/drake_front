@@ -6,7 +6,7 @@ const Abouts = () => {
     <div className='mb-[150px] py-5' id="About">
         <button className="border text-[14px] rounded-3xl py-2  px-5">ABOUT</button>
         <div>
-            <h1 className='text-[50px] mt-[50px] mb-5 font-light'>Every great design begin with
+            <h1 className='lg:text-[50px] mt-[50px] mb-5 font-light'>Every great design begin with
 an even <span className='text-[#28E98C]'>
 better story
     </span></h1>

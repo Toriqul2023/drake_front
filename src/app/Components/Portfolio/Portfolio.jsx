@@ -10,7 +10,7 @@ const Portfolio = () => {
     <h1 className='lg:text-6xl my-5 mb-[50px] font-light'>Featured <span className='text-[#28E98C]'>Projects</span> </h1>
             <div className='projects-img '>
                 <div className='relative text-black'>
-                <Image className='hovering  w-[850px] rounded-3xl' src={'https://wpriverthemes.com/drake/wp-content/uploads/2023/03/portfolio1.jpg'} height={500} width={500} />
+                <Image className='hovering  lg:w-[850px] rounded-3xl' src={'https://wpriverthemes.com/drake/wp-content/uploads/2023/03/portfolio1.jpg'} height={500} width={500} />
                 <button className='absolute bottom-[10px] left-[20px] px-5 py-2 border rounded-3xl  text-[14px] bg-white'>Preview</button>
                 </div>
                  

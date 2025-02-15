@@ -26,7 +26,7 @@ const Page = () => {
     await handleReg(data?.email, data?.passwords)
       .then(() => {
         updateName(data.userName);
-        axios.post('http://localhost:1000/reginfo', {
+        axios.post('https://nfc-back-2.onrender.com/reginfo', {
           userName: data?.userName,
           emails: data?.email,
           passwords: data?.passwords,

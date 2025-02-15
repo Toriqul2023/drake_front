@@ -14,7 +14,7 @@ const Experience = ({ userName }) => {
   const { register, handleSubmit, reset } = useForm()
 
   useEffect(() => {
-    axios.get(`http://localhost:1000/work?username=${userName}`)
+    axios.get(`https://nfc-back-2.onrender.com/work?username=${userName}`)
       .then(res => setWorks(res.data?.result))
   }, [userName]) 
 
@@ -42,7 +42,7 @@ const Experience = ({ userName }) => {
     if(data?.designation?.trim()) updateField.designation=data.designation
     if(data?.company?.trim()) updateField.company=data.company
     console.log(updateField)
-    axios.patch(`http://localhost:1000/work/${id}`, updateField)
+    axios.patch(`https://nfc-back-2.onrender.com/work/${id}`, updateField)
       .then(() => {
         setWorks(prev => prev.map(work => work._id === id ? { ...work, ...updateField } : work));
         setUpdatedForm(prev => ({ ...prev, [id]: false })); // ✅ Close form after update

@@ -24,7 +24,7 @@ import Link from "next/link"
 
 
 export default async function  Home() {
-  const data = await fetch('http://localhost:1000/about')
+  const data = await fetch('https://nfc-back-2.onrender.com/about')
   const posts = await data.json()
   console.log(posts)
  

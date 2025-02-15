@@ -19,7 +19,7 @@ const Abouts = ({userName}) => {
   const [aboutData,setaboutData]=useState([])
   const [showAboutUpdateForm, setShowAboutUpdateForm] = useState(false);
   useEffect(()=>{
-    axios.get(`http://localhost:1000/about?username=${userName}`)
+    axios.get(`https://nfc-back-2.onrender.com/about?username=${userName}`)
     .then(res=>{
       setaboutData(res.data.result);
       console.log(aboutData)
@@ -29,7 +29,7 @@ const Abouts = ({userName}) => {
     const updateField={};
     if(data.title) updateField.title=data.title
     if(data.shortTitle) updateField.shortTitle=data.shortTitle
-    axios.put(`http://localhost:1000/about?username=${user?.displayName}`,updateField)
+    axios.put(`https://nfc-back-2.onrender.com/about?username=${user?.displayName}`,updateField)
     .then(res=>setaboutData(res.data.result))
   }
  

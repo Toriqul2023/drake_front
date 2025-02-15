@@ -12,7 +12,7 @@ import axios from 'axios';
 const Introduce = ({userName}) => {
   const [intros,setIntros]=useState([])
   useEffect(()=>{
-    axios.get(`http://localhost:1000/intro?username=${userName}`)
+    axios.get(`https://nfc-back-2.onrender.com/intro?username=${userName}`)
     .then(res=>setIntros(res.data.result))
     
   })

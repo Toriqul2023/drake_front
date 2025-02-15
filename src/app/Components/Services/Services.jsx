@@ -12,7 +12,7 @@ const Services = ({userName}) => {
   const [updatedForm, setUpdatedForm] = useState({})
   const { register, handleSubmit, reset } = useForm()
  useEffect(()=>{
-  axios.get(`http://localhost:1000/project?username=${userName}`)
+  axios.get(`https://nfc-back-2.onrender.com/project?username=${userName}`)
   .then((res)=>{
     setServices(res.data?.result);
   })
@@ -41,7 +41,7 @@ const onSubmitUpdate = (data, id) => {
   if(data?.link?.trim()) updateField.link=data.link
  
   console.log(updateField)
-  axios.patch(`http://localhost:1000/project/${id}`, updateField)
+  axios.patch(`https://nfc-back-2.onrender.com/project/${id}`, updateField)
     .then(() => {
       setServices(prev => prev.map(service => service._id === id ? { ...service, ...updateField } : service));
       setUpdatedForm(prev => ({ ...prev, [id]: false })); // ✅ Close form after update

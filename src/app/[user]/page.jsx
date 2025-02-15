@@ -35,7 +35,7 @@ const Page = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:1000/profile?username=${userName}`)
+      .get(`https://nfc-back-2.onrender.com/profile?username=${userName}`)
       .then((res) => {
         setProfile(res.data?.result);
       });
@@ -67,7 +67,7 @@ const Page = () => {
     if(data?.twitter)  updateField.twitter=data.twitter
 
 
-    await axios.put(`http://localhost:1000/profile?username=${user?.displayName}`,updateField)
+    await axios.put(`https://nfc-back-2.onrender.com/profile?username=${user?.displayName}`,updateField)
     .then((res)=>setProfile(res.data?.result))
     
     setProfileForm(false);

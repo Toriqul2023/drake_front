@@ -43,7 +43,7 @@ const Page = () => {
   } = useForm(formOptions);
 
   const onSubmitAbout = (data) => {
-    axios.post('http://localhost:1000/about', {
+    axios.post('https://nfc-back-2.onrender.com/about', {
       title: data?.title,
       shortTitle: data?.shortTitle,
       userName: user?.displayName,
@@ -54,7 +54,7 @@ const Page = () => {
   };
 
   const onSubmitIntro = (data) => {
-    axios.post('http://localhost:1000/intro', {
+    axios.post('https://nfc-back-2.onrender.com/intro', {
       userName: user?.displayName,
       heading: data?.heading,
       experince: user?.experience,
@@ -66,7 +66,7 @@ const Page = () => {
   };
 
   const onSubmitAboutUpdate = (data) => {
-    axios.put(`http://localhost:1000/about?username=${user.displayName}`, {
+    axios.put(`https://nfc-back-2.onrender.com/about?username=${user.displayName}`, {
       title: data?.title,
       shortTitle: data?.shortTitle
     }).then(res => {
@@ -93,7 +93,7 @@ const Page = () => {
       return;
     }
 
-    await axios.post('http://localhost:1000/profile', {
+    await axios.post('https://nfc-back-2.onrender.com/profile', {
       userName: user?.displayName,
       ...data
     }).then(res => {
@@ -110,7 +110,7 @@ const Page = () => {
   };
 
   const onSubmitWork = (data) => {
-    axios.post('http://localhost:1000/work', {
+    axios.post('https://nfc-back-2.onrender.com/work', {
       sYear: data?.sYear,
       lYear: data?.lYear,
       designation: data?.designation,
@@ -123,7 +123,7 @@ const Page = () => {
   };
 
   const onSubmitProject = (data) => {
-    axios.post('http://localhost:1000/project', {
+    axios.post('https://nfc-back-2.onrender.com/project', {
       userName: user?.displayName,
       title: data?.title,
       description: data?.description,

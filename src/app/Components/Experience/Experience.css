@@ -1,8 +1,9 @@
 .framers{
-    transition: 0.3s;
+    transition: 1.3s;
    
 }
-.framers:hover + .box{
+
+.framers:hover> .box{
     background-color: #28E98C;
 }
 .framers:hover > #p1{

@@ -6,6 +6,7 @@ import Services from "./Components/Services/Services"
 import Portfolio from "./Components/Portfolio/Portfolio"
 import Abouts from "./Components/Abouts/Abouts"
 import Experience from "./Components/Experience/Experience"
+import Languages from "./Components/Languages/Languages"
 
 import {
  faFacebook,
@@ -21,7 +22,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
 
-export default function Home() {
+
+export default async function  Home() {
+  const data = await fetch('http://localhost:1000/about')
+  const posts = await data.json()
+  console.log(posts)
+ 
   return (
     <>
        <video className="body-overlay" loop muted autoPlay >
@@ -30,12 +36,13 @@ export default function Home() {
  
        <div className="row grid lg:grid-cols-4 grid-cols-1  px-5 ">
             <div className="pt-[50px]">
-              <div className="lg:ixed border w-[400px] rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
+              <div className="lg:fixed border w-[400px] rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
               <div className="flex justify-between items-center py-5">
                   <h1 className="text-4xl">Toriqul</h1>
                   <p className=""> Developer</p>
                 </div>
-                <Image className="rounded-3xl mb-[30px]" src={'https://scontent.fdac80-1.fna.fbcdn.net/v/t39.30808-6/411074347_1575848396577332_4331380925465508173_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeFjliNsSVqEsxMCulUikP690igXI2MahrjSKBcjYxqGuEIqa0noBUffi6IGTbcnvtsXQZVG7mewRHjMzmsiLlrs&_nc_ohc=Xdr4NYTIJBwAX90CUlj&_nc_ht=scontent.fdac80-1.fna&oh=00_AfAiPrgaqa4-BsWj4yWdp9QLP8_LXsABLeNCvTZ81GTaEQ&oe=658BF29E'} height={500} width={500}/>
+                <Image className="rounded-3xl mb-[30px]" src=
+                {'https://scontent.fdac5-1.fna.fbcdn.net/v/t39.30808-6/448019126_1686558688839635_946738839175870248_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeFZatGLMLZbqyFJOdLocO8I0-EFpejrE5rT4QWl6OsTmh169g_PwWmIGPS5f1bfbX1s0a1ZpivrdUT0aLnr4-Mk&_nc_ohc=U-4LPynXDsoQ7kNvgH1brrr&_nc_oc=Adid2cXEC4FXsi1BpJQmikInynMaFbL65Zv7yZdf6YBbBwRyPHF-TIywoQdWau3lOuE&_nc_zt=23&_nc_ht=scontent.fdac5-1.fna&_nc_gid=ABCuq-etpNWHd5JFQSLenfL&oh=00_AYADXvkhFmdMEcZGps8-8Qh2Uxj8W9iXL76bVMJdAv24PQ&oe=6769A3BD'} height={500} width={500}/>
                 <div className="text-center w-[100%]">
                 <h3 className="text-2xl ">hello@toriqul.design</h3>
                             <h3 className="text-2xl pb-[40px]">Based in Tejgaon, Dhaka</h3>  
@@ -60,11 +67,11 @@ export default function Home() {
         <Abouts/>
         <Experience/>
         <Services/>
-        <Portfolio/>
+        
         
      
         </div>
-        <div className=" absolute top-[21%]  right-[10px] p-5 pt-[100px] flex justify-end hidden">
+        <div className=" absolute top-[21%]  right-[50px] p-5 pt-[100px] flex justify-end hidden lg:block">
           <div className="menu w-[50px] py-[20px] px-5 border-[#575757]  rounded-3xl fixed border items-center justify-center">
             
 

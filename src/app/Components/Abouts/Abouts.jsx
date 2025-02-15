@@ -1,16 +1,68 @@
-import React from 'react'
+'use client'
+import { MyContext } from '@/app/context/context'
+import axios from 'axios'
+import React, { useContext, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { ToastContainer, toast } from 'react-toastify'; // Import toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 
-const Abouts = () => {
+const Abouts = ({userName}) => {
+  const {user}=useContext(MyContext)
+  console.log(user?.displayName)
+  const {
+    register:registerAbout,
+    handleSubmit:handleSubmitAbout,
+    
+    formState: { errorsAbout }
+
+  }=useForm()
+  const [aboutData,setaboutData]=useState([])
+  const [showAboutUpdateForm, setShowAboutUpdateForm] = useState(false);
+  useEffect(()=>{
+    axios.get(`http://localhost:1000/about?username=${userName}`)
+    .then(res=>{
+      setaboutData(res.data.result);
+      console.log(aboutData)
+    })
+  },[])
+  const onSubmitAboutUpdate=data=>{
+    const updateField={};
+    if(data.title) updateField.title=data.title
+    if(data.shortTitle) updateField.shortTitle=data.shortTitle
+    axios.put(`http://localhost:1000/about?username=${user?.displayName}`,updateField)
+    .then(res=>setaboutData(res.data.result))
+  }
+ 
+  console.log({userName})
+  console.log(aboutData)
   return (
     <>
     <div className='mb-[150px] py-5' id="About">
         <button className="border text-[14px] rounded-3xl py-2  px-5">ABOUT</button>
         <div>
-            <h1 className='lg:text-[50px] mt-[50px] mb-5 font-light'>Every great design begin with
-an even <span className='text-[#28E98C]'>
-better story
-    </span></h1>
-<p className='mt-[50px] text-gray-400'>Since beginning my journey as a freelance designer nearly 8 years ago, I've done remote work for agencies, consulted for startups, and collaborated with talented people to create digital products for both business and consumer use. I'm quietly confident, naturally curious, and perpetually working on improving my chopsone design problem at a time.</p>
+            <h1 className='lg:text-[50px] mt-[50px] mb-5 font-light'>{aboutData[0]?.title}</h1>
+            <p className='mt-[50px] text-gray-400'>{aboutData[0]?.shortTitle}</p>
+            {user?.email ?(
+                <>
+                     <button onClick={() => setShowAboutUpdateForm(!showAboutUpdateForm)} className="bg-blue-500 text-white px-4 my-4 py-2 rounded">
+                       {showAboutUpdateForm ? "Hide Update Form" : "Update About"}
+                     </button> 
+                     {
+                      showAboutUpdateForm && (
+                        <form onSubmit={handleSubmitAbout(onSubmitAboutUpdate)} className="mt-4">
+                        <h1 className='text-lg '>Update Your About</h1>
+                        <input className='text-black p-2  mr-4' {...registerAbout("title")} placeholder="Enter About heading" />
+                        <input className='text-black p-2  m-4' {...registerAbout("shortTitle")} placeholder="Enter Short Title" />
+                       
+          
+                        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded mt-2">
+                          Submit Update
+                        </button>
+                      </form>
+                      )
+                     }
+                </>
+            ):(<></>) }
         </div>
     </div>
             

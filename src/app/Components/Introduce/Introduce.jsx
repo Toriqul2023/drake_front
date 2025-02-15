@@ -1,21 +1,31 @@
+'use client'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Introduce.css'
 import {
   faHouse,
  
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 
-const Introduce = () => {
+const Introduce = ({userName}) => {
+  const [intros,setIntros]=useState([])
+  useEffect(()=>{
+    axios.get(`http://localhost:1000/intro?username=${userName}`)
+    .then(res=>setIntros(res.data.result))
+    
+  })
+
   return (
     <>
       <div className='mb-[135px] pt-[50px]' id="Home">
       <button className="border text-[14px] rounded-3xl py-2  px-5 "><FontAwesomeIcon style={{marginRight:'5px'}} icon={faHouse} /> 
-      INTRODUCE</button>
+     INTRODUCE</button>
          <div className=''>
-            <h1 className='lg:text-[70px] text-[30px] mb-5 font-light'> Say Hi from <span className='text-[#28E98C]'>Toriqul</span>, Webflow Designer and Developer</h1>
-            <p className='max-w-[488px] text-gray-400 my-5 mb-[50px]'>I design and code beautifully simple things and i love what i do. Just simple like that!</p>
+            <h1 className='lg:text-[70px] text-[30px] mb-5 font-light'>Say Hi from <span className='text-green-600'>{intros[0]?.heading}</span></h1>
+            
+            <p className='max-w-[488px] text-gray-400 my-5 mb-[50px]'>{intros[0]?.metaInfo}</p>
             
             <div className="border ml-[auto] mr-[20px] mb-[20px] rounded-full relative w-[175px] h-[175px] flex items-center  relative">
              <Image id='img'  src={'https://wpriverthemes.com/drake/wp-content/uploads/2023/03/round-text.png'} height={500} width={500} />

@@ -92,14 +92,17 @@ const Page = () => {
           type="video/mp4"
         />
       </video>
-
+    
       <div className="row grid lg:grid-cols-4 grid-cols-1 px-5">
+
+     
         <div className="pt-[50px]">
           <div className="lg:fixed border w-[400px] rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
             <div className="flex justify-between items-center py-5">
               <h1 className="text-4xl">{userName}</h1>
               <p>{profile[0]?.designation}</p>
             </div>
+   
             <Image
               className="rounded-3xl mb-[30px]"
               src={profile[0]?.image}
@@ -127,11 +130,12 @@ const Page = () => {
                   </li>
                 )}
               </ul>
-
+              <a href="./contact.vcf" download>
               <button className="rounded-3xl bg-[#28E98C] px-[35%] py-3 text-black">
                 Contact Me
               </button>
-
+              </a>
+  
               {user?.email && (
                 <>
                   <button

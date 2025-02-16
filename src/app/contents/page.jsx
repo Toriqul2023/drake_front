@@ -48,8 +48,13 @@ const Page = () => {
       shortTitle: data?.shortTitle,
       userName: user?.displayName,
     }).then(res => {
-      toast.success('About section submitted successfully!'); // Show success toast
-      console.log(res);
+        if((res.data?.count)>0){
+        toast.error("You already submitted")
+      }
+      else{
+        toast.success('Intro section submitted successfully!'); // Show success toast
+        console.log(res.data);
+      }
     });
   };
 
@@ -57,23 +62,22 @@ const Page = () => {
     axios.post('https://nfc-back-2.onrender.com/intro', {
       userName: user?.displayName,
       heading: data?.heading,
-      experince: user?.experience,
-      projects: user?.projects,
+      metaInfo:data?.metaInfo,
+      experince: data?.experience,
+      projects: data?.projects,
     }).then(res => {
-      toast.success('Intro section submitted successfully!'); // Show success toast
-      console.log(res);
+      if((res.data?.count)>0){
+        toast.error("You already submitted")
+      }
+      else{
+        toast.success('Intro section submitted successfully!'); // Show success toast
+        console.log(res.data);
+      }
+    
     });
   };
 
-  const onSubmitAboutUpdate = (data) => {
-    axios.put(`https://nfc-back-2.onrender.com/about?username=${user.displayName}`, {
-      title: data?.title,
-      shortTitle: data?.shortTitle
-    }).then(res => {
-      toast.success('About section updated successfully!'); // Show success toast
-      console.log(res.data);
-    });
-  };
+ 
 
   const onSubmitProfile = async (data) => {
     const imageFile = data.image[0];
@@ -161,7 +165,7 @@ const Page = () => {
         <input className='input-field' {...registerIntro('projects', { required: true })} placeholder='Enter Short Title' />
         <div className='flex gap-2'>
           <button type='submit' className='btn-primary'>Submit</button>
-          <button type='button' onClick={handleSubmitAbout(onSubmitAboutUpdate)} className='btn-secondary'>Update</button>
+          
         </div>
       </form>
 
@@ -172,7 +176,7 @@ const Page = () => {
         <input className='input-field' {...registerAbout('shortTitle', { required: true })} placeholder='Enter Short Title' />
         <div className='flex gap-2'>
           <button type='submit' className='btn-primary'>Submit</button>
-          <button type='button' onClick={handleSubmitAbout(onSubmitAboutUpdate)} className='btn-secondary'>Update</button>
+          
         </div>
       </form>
 

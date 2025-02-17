@@ -7,8 +7,6 @@ import { ToastContainer, toast } from 'react-toastify'; // Import toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 
 
-import ReactDOM from "react-dom";
-import QRCode from "react-qr-code";
 
 const Abouts = ({userName}) => {
   const {user}=useContext(MyContext)
@@ -43,7 +41,7 @@ const Abouts = ({userName}) => {
     <>
     <div className='mb-[150px] py-5' id="About">
         <button className="border text-[14px] rounded-3xl py-2  px-5">ABOUT</button>
-   <QRCode value="hi bangladesh"/>
+ 
         <div>
             <h1 className='lg:text-[50px] mt-[50px] mb-5 font-light'>{aboutData[0]?.title}</h1>
             <p className='mt-[50px] text-gray-400'>{aboutData[0]?.shortTitle}</p>

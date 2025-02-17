@@ -26,7 +26,7 @@ import { ToastContainer, toast } from 'react-toastify'; // Import toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 
 const Page = () => {
-  const { user } = useContext(MyContext);
+  const { user,handleSignOut } = useContext(MyContext);
   const [profileForm, setProfileForm] = useState(false);
   const params = useParams();
   const userName = params?.user;
@@ -67,6 +67,9 @@ const Page = () => {
       toast.error("Failed to download contact card.");
     }
   };
+  const  logOut=async()=>{
+    handleSignOut()
+  }
   const onSubmit =async (data) => {
     try{
     const imageFile = data.image[0];
@@ -110,6 +113,7 @@ const Page = () => {
 
   return (
     <>
+    {user?.email && (<><button onClick={logOut}>Hello</button></>)}
       <video className="body-overlay" loop muted autoPlay>
         <source
           src="https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video4.mp4"
@@ -143,6 +147,39 @@ const Page = () => {
 
               <ul className="flex justify-center my-[20px] gap-3">
                 {profile[0]?.fbLink && (
+                  <li className="border-2 border-[#565656] p-4 rounded-full">
+                    <a href={`${profile[0]?.fbLink}`}>
+                      <FontAwesomeIcon
+                        id="homeicon"
+                        style={{ fontSize: "28px", color: "#9CA3AF" }}
+                        icon={faUser}
+                      />
+                    </a>
+                  </li>
+                )}
+                {profile[0]?.insta && (
+                  <li className="border-2 border-[#565656] p-4 rounded-full">
+                    <a href={`${profile[0]?.fbLink}`}>
+                      <FontAwesomeIcon
+                        id="homeicon"
+                        style={{ fontSize: "28px", color: "#9CA3AF" }}
+                        icon={faUser}
+                      />
+                    </a>
+                  </li>
+                )}
+                {profile[0]?.twitter && (
+                  <li className="border-2 border-[#565656] p-4 rounded-full">
+                    <a href={`${profile[0]?.fbLink}`}>
+                      <FontAwesomeIcon
+                        id="homeicon"
+                        style={{ fontSize: "28px", color: "#9CA3AF" }}
+                        icon={faUser}
+                      />
+                    </a>
+                  </li>
+                )}
+                {profile[0]?.linkedin && (
                   <li className="border-2 border-[#565656] p-4 rounded-full">
                     <a href={`${profile[0]?.fbLink}`}>
                       <FontAwesomeIcon

@@ -131,7 +131,7 @@ const Page = () => {
                 )}
               </ul>
               <a href="./contact.vcf" download>
-              <button className="rounded-3xl bg-[#28E98C] px-[35%] py-3 text-black">
+              <button className="rounded-3xl bg-[#28E98C] px-[35%] py-3 text-black ">
                 Contact Me
               </button>
               </a>

@@ -42,7 +42,31 @@ const Page = () => {
   }, []);
  
 
+  const handleDownloadVCard = async () => {
+    try {
+      const response = await axios.post(
+        "https://nfc-back-2.onrender.com/vcard",
+        {
+          name: profile[0]?.nickName || userName,
+          phone: profile[0]?.phone || "N/A",
+          email: profile[0]?.email || "N/A",
+          address: profile[0]?.address || "N/A",
+        },
+        { responseType: "blob" }
+      );
 
+      const blob = new Blob([response.data], { type: "text/vcard" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${userName.replace(/\s+/g, "_")}.vcf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error generating vCard:", error);
+      toast.error("Failed to download contact card.");
+    }
+  };
   const onSubmit =async (data) => {
     try{
     const imageFile = data.image[0];
@@ -130,11 +154,12 @@ const Page = () => {
                   </li>
                 )}
               </ul>
-              <a href="./contact.vcf" download>
-              <button className="rounded-3xl bg-[#28E98C] px-[35%] py-3 text-black ">
+              <button
+                onClick={handleDownloadVCard}
+                className="rounded-3xl bg-[#28E98C] px-[35%] py-3 text-black"
+              >
                 Contact Me
               </button>
-              </a>
   
               {user?.email && (
                 <>

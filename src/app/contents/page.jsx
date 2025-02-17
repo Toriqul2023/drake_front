@@ -163,8 +163,8 @@ const Page = () => {
         <h2 className='text-lg font-medium mb-2'>Intro </h2>
         <input className='input-field' {...registerIntro('heading', { required: true })} placeholder='Enter Your nickname' />
         <input className='input-field' {...registerIntro('metaInfo', { required: true })} placeholder='' />
-        <input className='input-field' {...registerIntro('experience', { required: true })} placeholder='Enter Short Title' />
-        <input className='input-field' {...registerIntro('projects', { required: true })} placeholder='Enter Short Title' />
+        <input className='input-field' {...registerIntro('experience', { required: true })} placeholder='Enter your work experience' />
+        <input className='input-field' {...registerIntro('projects', { required: true })} placeholder='Enter how many projects you have completed' />
         <div className='flex gap-2'>
           <button type='submit' className='btn-primary'>Submit</button>
           

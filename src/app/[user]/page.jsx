@@ -1,15 +1,18 @@
 "use client";
 
-import {
-  
-  faUser,
-  faFile,
-  faBarsStaggered,
-  faBoxesStacked,
-  faHome,
-  faMessage,
-  faSoccerBall,
-} from "@fortawesome/free-solid-svg-icons";
+
+  import {
+    FacebookShareButton,
+    FacebookIcon,
+    PinterestShareButton,
+    PinterestIcon,
+    RedditShareButton,
+    RedditIcon,
+    WhatsappShareButton,
+    WhatsappIcon,
+    LinkedinShareButton,
+    LinkedinIcon,
+  } from 'next-share';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,6 +27,7 @@ import { MyContext } from "../context/context";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify'; // Import toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
+import { SocialIcon } from 'react-social-icons'
 
 const Page = () => {
   const { user,handleSignOut } = useContext(MyContext);
@@ -113,7 +117,7 @@ const Page = () => {
 
   return (
     <>
-    {user?.email && (<><button onClick={logOut}>Hello</button></>)}
+    {user?.email && (<><button onClick={logOut}>Log out</button></>)}
       <video className="body-overlay" loop muted autoPlay>
         <source
           src="https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video4.mp4"
@@ -134,7 +138,7 @@ const Page = () => {
             <Image
               className="rounded-3xl mb-[30px]"
               src={profile[0]?.image}
-             unoptimized
+              unoptimized
               height={500}
               width={500}
             />
@@ -149,45 +153,33 @@ const Page = () => {
                 {profile[0]?.fbLink && (
                   <li className="border-2 border-[#565656] p-4 rounded-full">
                     <a href={`${profile[0]?.fbLink}`}>
-                      <FontAwesomeIcon
-                        id="homeicon"
-                        style={{ fontSize: "28px", color: "#9CA3AF" }}
-                        icon={faUser}
-                      />
+                    <SocialIcon network="facebook"  />
                     </a>
                   </li>
                 )}
                 {profile[0]?.insta && (
                   <li className="border-2 border-[#565656] p-4 rounded-full">
-                    <a href={`${profile[0]?.fbLink}`}>
-                      <FontAwesomeIcon
-                        id="homeicon"
-                        style={{ fontSize: "28px", color: "#9CA3AF" }}
-                        icon={faUser}
-                      />
+                    <a href={`${profile[0]?.insta}`}>
+                         <SocialIcon network="instagram"  />
                     </a>
                   </li>
                 )}
                 {profile[0]?.twitter && (
                   <li className="border-2 border-[#565656] p-4 rounded-full">
-                    <a href={`${profile[0]?.fbLink}`}>
-                      <FontAwesomeIcon
-                        id="homeicon"
-                        style={{ fontSize: "28px", color: "#9CA3AF" }}
-                        icon={faUser}
-                      />
+                    
+                    <a href={`${profile[0]?.twitter}`}>
+                    <SocialIcon network="twitter"/>
                     </a>
+                    
                   </li>
                 )}
                 {profile[0]?.linkedin && (
                   <li className="border-2 border-[#565656] p-4 rounded-full">
+                   
                     <a href={`${profile[0]?.fbLink}`}>
-                      <FontAwesomeIcon
-                        id="homeicon"
-                        style={{ fontSize: "28px", color: "#9CA3AF" }}
-                        icon={faUser}
-                      />
+                    <SocialIcon network="linkedin" />
                     </a>
+                    
                   </li>
                 )}
               </ul>

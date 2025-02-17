@@ -161,8 +161,8 @@ const Page = () => {
       {/* intro */}
       <form onSubmit={handleSubmitIntro(onSubmitIntro)} className='mb-6'>
         <h2 className='text-lg font-medium mb-2'>Intro </h2>
-        <input className='input-field' {...registerIntro('heading', { required: true })} placeholder='Enter Heading Title' />
-        <input className='input-field' {...registerIntro('metaInfo', { required: true })} placeholder='Enter Short Title' />
+        <input className='input-field' {...registerIntro('heading', { required: true })} placeholder='Enter Your nickname' />
+        <input className='input-field' {...registerIntro('metaInfo', { required: true })} placeholder='' />
         <input className='input-field' {...registerIntro('experience', { required: true })} placeholder='Enter Short Title' />
         <input className='input-field' {...registerIntro('projects', { required: true })} placeholder='Enter Short Title' />
         <div className='flex gap-2'>

@@ -49,14 +49,14 @@ const Introduce = ({userName}) => {
            
             <div className='flex lg:w-[500px] justify-between'>
               <div>
-                 <h3 className='text-5xl  text-[#28E98C]'>3+</h3>
+                 <h3 className='text-5xl  text-[#28E98C]'>{intros[0]?.experience}+</h3>
                  <p className='text-gray-400 text-[14px] mt-3'>
                  YEARS OF
                  EXPERIENCE         
                  </p>
               </div>
               <div>
-                 <h3 className='text-5xl text-[#28E98C]'>5+</h3>
+                 <h3 className='text-5xl text-[#28E98C]'>{intros[0]?.projects}+</h3>
                  <p className='text-gray-400 text-[14px] mt-3'>
                  PROJECTS COMPLETED ON LOCALS
                  </p>
@@ -86,29 +86,29 @@ const Introduce = ({userName}) => {
             >
               ❌
             </button>
-            <h2 className="text-xl text-black font-semibold mb-4">Update Profile</h2>
+            <h2 className="text-xl text-black font-semibold mb-4">Update Introduce</h2>
             <form className="text-black" onSubmit={handleSubmit(onSubmit)}>
               <label className="block mb-2 text-black">Enter your nickname</label>
               <input
                 {...register("heading")}
                
                 className="w-full border text-black p-2 rounded mb-3"
-                placeholder="Enter Your designation"
+                placeholder="Enter Your Nickname"
               />
-              <label className="block mb-2">Designation</label>
-              <input
+              <label className="block mb-2">Tell Me something about your work </label>
+              <textarea
                 {...register("metainfo")}
               
                 className="w-full border p-2 rounded mb-3"
               />
            
-              <label className="block mb-2">Enter your address</label>
+              <label className="block mb-2">Enter your work experience year</label>
               <input
                 {...register("experience")}
                 
                 className="w-full border p-2 rounded mb-3"
               />
-              <label className="block mb-2">Facebook Link</label>
+              <label className="block mb-2">Enter how many projects you have completed </label>
               <input
                 {...register("projects")}
                

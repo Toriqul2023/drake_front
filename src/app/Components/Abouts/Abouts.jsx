@@ -53,10 +53,13 @@ const Abouts = ({userName}) => {
                      </button> 
                      {
                       showAboutUpdateForm && (
-                        <form onSubmit={handleSubmitAbout(onSubmitAboutUpdate)} className="mt-4">
+                        <form  onSubmit={handleSubmitAbout(onSubmitAboutUpdate)} className="mt-4">
                         <h1 className='text-lg '>Update Your About</h1>
-                        <input className='text-black p-2  mr-4' {...registerAbout("title")} placeholder="Enter About heading" />
-                        <input className='text-black p-2  m-4' {...registerAbout("shortTitle")} placeholder="Enter Short Title" />
+                        <input className='text-black p-2  mr-4' {...registerAbout("title")} placeholder="Enter Title " />
+                        <div>
+                        <textarea className='text-black p-2  m-4 ml-0' {...registerAbout("shortTitle")} placeholder="Tell me about yourself" />
+                        </div>
+                        
                        
           
                         <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded mt-2">

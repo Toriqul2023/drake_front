@@ -53,7 +53,7 @@ const Page = () => {
         toast.error("You already submitted")
       }
       else{
-        toast.success('Intro section submitted successfully!'); // Show success toast
+        toast.success('About section submitted successfully!'); // Show success toast
         console.log(res.data);
       }
     });

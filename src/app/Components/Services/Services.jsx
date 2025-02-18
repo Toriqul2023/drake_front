@@ -16,7 +16,7 @@ const Services = ({userName}) => {
   .then((res)=>{
     setServices(res.data?.result);
   })
- },[userName])
+ },[services])
  const toggleUpdateForm = (id, serviceData) => {
   setUpdatedForm(prev => ({
     ...prev,
@@ -44,7 +44,10 @@ const onSubmitUpdate = (data, id) => {
   axios.patch(`https://nfc-back-2.onrender.com/project/${id}`, updateField)
     .then(() => {
       setServices(prev => prev.map(service => service._id === id ? { ...service, ...updateField } : service));
-      setUpdatedForm(prev => ({ ...prev, [id]: false })); // ✅ Close form after update
+      reset()
+      setUpdatedForm(prev => ({ ...prev, [id]: false }));
+      
+       // ✅ Close form after update
     })
     .catch(err => console.error("Error updating:", err))
 }
@@ -52,8 +55,8 @@ const onSubmitUpdate = (data, id) => {
   return (
     <>
     <div className='mb-[150px] py-5' id="Service">
-    <button className="border text-[14px] rounded-3xl mb-[20px] py-2  px-5">SERVICES</button>
-    <h1 className='lg:text-6xl my-3 mb-[50px] font-light'>My <span className='text-[#28E98C]'>Specializations</span> </h1>
+    <button className="border text-[14px] rounded-3xl mb-[20px] py-2  px-5">Projects</button>
+    <h1 className='lg:text-6xl my-3 mb-[50px] font-light'>My <span className='text-[#28E98C]'> projects</span> </h1>
     <div>
       {
              services.map(service=>( <div key={service?._id}  className='border border-[#565656] rounded-3xl my-4 pl-[30px] pt-[40px] pb-[30px]   hover:border-[#28E98C]'>
@@ -77,19 +80,23 @@ const onSubmitUpdate = (data, id) => {
                       <input 
                         className='text-black p-2 mr-4' 
                         {...register("title")} 
-                        defaultValue={service.title} 
+                        placeholder='Enter your project title'
+                      
                          
                       />
-                      <input 
+                      <div>
+                      <textarea
                         className='text-black p-2 m-4 ml-0' 
                         {...register("description")} 
-                        defaultValue={service.description} 
+                       placeholder='Enter a short decription of project'
                         
                       />
+                      </div>
+                     
                       <input 
                         className='text-black p-2 m-4 ml-0' 
                         {...register("link")} 
-                        defaultValue={service?.link} 
+                        
                         placeholder="Enter Your project link" 
                       />
                     

@@ -12,15 +12,16 @@ import jsPDF from 'jspdf';
 const Page = () => {
   const { user } = useContext(MyContext);
   const [profileImage, setProfileImage] = useState();
-  const [profileData, setProfileData] = useState(null);
-  const [aboutData, setAboutData] = useState(null);
-  const [introData, setIntroData] = useState(null);
-  const [workData, setWorkData] = useState(null);
+  const [profileData, setProfileData] = useState(false);
+  const [aboutData, setAboutData] = useState(false);
+  const [introData, setIntroData] = useState(false);
+  const [workData, setWorkData] = useState(false);
   const [completedSections, setCompletedSections] = useState([]);
   const [projectData, setProjectData] = useState(null);
-  const [activeForm, setActiveForm] = useState(null);
+  const [profileLink, setProfileLink] = useState("");
   const [isPresent, setIsPresent] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const username = user?.displayName?.toLowerCase().replace(/\s+/g, '');
   const formOptions = { mode: 'onBlur' };
   const {
     register: registerAbout,
@@ -57,7 +58,7 @@ const Page = () => {
     axios.post('https://nfc-back-2.onrender.com/about', {
       title: data?.title,
       shortTitle: data?.shortTitle,
-      userName: user?.displayName,
+      userName: username,
     }).then(res => {
         if((res.data?.count)>0){
         toast.error("You already submitted")
@@ -65,14 +66,14 @@ const Page = () => {
       else{
         toast.success('About section submitted successfully!'); // Show success toast
         console.log(res.data);
-        setAboutData(data);
+        setAboutData(true);
       }
     });
   };
 
   const onSubmitIntro = (data) => {
     axios.post('https://nfc-back-2.onrender.com/intro', {
-      userName: user?.displayName,
+      userName: username,
       heading: data?.heading,
       metaInfo:data?.metaInfo,
       experince: data?.experience,
@@ -84,7 +85,7 @@ const Page = () => {
       else{
         toast.success('Intro section submitted successfully!'); // Show success toast
         console.log(res.data);
-        setIntroData(data);
+        setIntroData(true);
       }
     
     });
@@ -111,7 +112,7 @@ const Page = () => {
     }
 
     await axios.post('https://nfc-back-2.onrender.com/profile', {
-      userName: user?.displayName,
+      userName: username,
       ...data
     }).then(res => {
       console.log(res.data.count)
@@ -120,7 +121,7 @@ const Page = () => {
       }
       else{
         toast.success('Profile submitted successfully!'); // Show success toast
-        setProfileData(data);
+        setProfileData(true);
       }
      
     });
@@ -132,10 +133,10 @@ const Page = () => {
       lYear: isPresent ? 'Present' : data?.lYear,
       designation: data?.designation,
       company: data?.company,
-      userName: user?.displayName
+      userName: username,
     }).then(res => {
       toast.success('Work experience submitted successfully!'); // Show success toast
-      setWorkData(data);
+      setWorkData(true);
       resetWork()
       
     });
@@ -144,35 +145,39 @@ const Page = () => {
 
   const onSubmitProject = (data) => {
     axios.post('https://nfc-back-2.onrender.com/project', {
-      userName: user?.displayName,
+      userName: username,
       title: data?.title,
       description: data?.description,
       link: data?.link
     }).then(res => {
       toast.success('Project submitted successfully!'); // Show success toast
-      setProjectData(data);
+      setProjectData(true);
      
     });
   };
-  const handleFocus = (formName) => {
-    setActiveForm(formName);
+
+  const checkCompletion = () => {
+    if ((profileData && aboutData && introData && workData && projectData) || workData || projectData) {
+      const generatedLink = `https://nfc-rho-one.vercel.app/${username}`;
+      setProfileLink(generatedLink);
+      setIsModalOpen(true); 
+    } else {
+      toast.error("Complete either (Profile + About + Intro) or (Work/Project) to generate a link!");
+    }
   };
-  const handleBlur = () => {
-    setActiveForm(null);
-  };
-  
 
   return (
     <Private>
         <div className=' mx-auto p-6  shadow-lg rounded-lg'>
-      <h1 className='text-2xl font-semibold text-center mb-6'>Profile Settings</h1>
+      <h1 className='text-2xl font-semibold text-center mb-6'>At first time you have to complete every form.After then you can add more work and projects</h1>
 
       {/* Profile Section */}
-      <div className={`transition-all duration-300 ${activeForm !== 'profile' && activeForm ? 'blur-sm' : ''}`}>
+     
       <form onSubmit={handleSubmitProfile(onSubmitProfile)}>
         <h2 className='text-lg font-medium mb-2'>Profile Details</h2>
         <input className='input-field' {...registerProfile('nickName', { required: true })} placeholder='Nickname' />
         <input className='input-field' {...registerProfile('designation', { required: true })} placeholder='Designation' />
+        <input className='input-field' {...registerProfile('Phone', { required: true })} placeholder='Enter your phone number(01718******)' />
         <label htmlFor="image">Add your Image</label>
         <input id= "image" type='file' className='input-field' {...registerProfile('image', { required: true })} />
 
@@ -190,9 +195,11 @@ const Page = () => {
       <form onSubmit={handleSubmitIntro(onSubmitIntro)} className='mb-6'>
         <h2 className='text-lg font-medium mb-2'>Intro </h2>
         <input className='input-field' {...registerIntro('heading', { required: true })} placeholder='Enter Your nickname' />
-        <input className='input-field' {...registerIntro('metaInfo', { required: true })} placeholder='Write a short introduction about yourself' />
-        <input className='input-field' {...registerIntro('experience', { required: true })} placeholder='Enter your work experience' />
-        <input className='input-field' {...registerIntro('projects', { required: true })} placeholder='Enter how many projects you have completed' />
+        <textarea className='input-field h-32 w-[100%]' {...registerIntro('metaInfo', { required: true })} placeholder='Write a short introduction about yourself' />
+       <label htmlFor="">optional</label>
+        <input className='input-field' {...registerIntro('experience', )} placeholder='Years of experience' />
+        <label htmlFor="">optional</label>
+        <input className='input-field' {...registerIntro('projects',)} placeholder='Enter how many projects you have completed' />
         <div className='flex gap-2'>
           <button type='submit' className='btn-primary'>Submit</button>
           
@@ -202,7 +209,7 @@ const Page = () => {
       {/* About Section */}
       <form onSubmit={handleSubmitAbout(onSubmitAbout)} className='mb-6'>
         <h2 className='text-lg font-medium mb-2'>About You</h2>
-        <input className='input-field' {...registerAbout('title', { required: true })} placeholder='Enter Heading Title' />
+        <input className='input-field' {...registerAbout('title', { required: true })} placeholder='Enter a heading Title' />
         <input className='input-field' {...registerAbout('shortTitle', { required: true })} placeholder='Tell me about your self' />
         <div className='flex gap-2'>
           <button type='submit' className='btn-primary'>Submit</button>
@@ -239,17 +246,47 @@ const Page = () => {
 
       {/* Project Section */}
       <form onSubmit={handleSubmitProject(onSubmitProject)} className='mb-6'>
-        <h2 className='text-lg font-medium mb-2'>Project</h2>
-        <label className='my-4' htmlFor="">You can add multiple projects</label>
-        <input className='input-field' {...registerProject('title', { required: true })} placeholder='Title' />
-        <input className='input-field' {...registerProject('description', { required: true })} placeholder='Describe your key projects' />
+        <h2 className='text-lg font-medium '>Project</h2>
+        <label className='my-4 ' htmlFor="">You can add multiple projects</label>
+        <input className='input-field' {...registerProject('title', { required: true })} placeholder='Enter a project title' />
+        <label htmlFor=""></label>
+        <textarea className='input-field' {...registerProject('description', { required: true })} placeholder='Describe your  project' />
         <input className='input-field' {...registerProject('link', { required: true })} placeholder='Project Link' />
         <button type='submit' className='btn-primary'>Add experience</button>
       </form>
 
       {/* Toast container */}
+      <button onClick={checkCompletion} className={`btn-primary ${
+    (profileData && aboutData && introData && workData && projectData) || workData|| projectData
+      ? ''
+      : 'opacity-50 cursor-not-allowed'
+  }`}>Complete</button>
+     {isModalOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h2 className="text-xl font-semibold text-black">Your Profile is Ready</h2>
+              <p className='text-black'>Provide this link to us</p>
+              <p className="mt-2">
+                <a
+                  href={profileLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline"
+                >
+                  {profileLink}
+                </a>
+              </p>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="btn-primary mt-4"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       <ToastContainer />
-    </div>
+    
     </Private>
   
   );

@@ -34,7 +34,7 @@ label {
 }
 
 /* Inputs */
-input {
+input,textarea {
   display: block;
   width: 100%;
   border-radius: 5px;
@@ -62,13 +62,13 @@ p {
 
 p::before {
   display: inline;
-  content: "⚠ ";
+  
 }
 
 /* Buttons */
 button[type="submit"],
 input[type="submit"] {
-  background: #ec5990;
+  background: #0FA858;
   color: white;
   border: none;
   margin-top: 20px;

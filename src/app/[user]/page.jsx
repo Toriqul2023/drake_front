@@ -90,6 +90,7 @@ const Page = () => {
     updateField.userName=user?.displayName
     if(data?.nickName) updateField.nickName=data.nickName
     if(data?.designation) updateField.designation=data.designation
+    if(data?.phone) updateField.phone=data.phone
     if(data?.image) updateField.image=imageUrl
     if(data?.address) updateField.address=data.address
     if(data?.fbLink) updateField.fbLink=data.fbLink
@@ -176,7 +177,7 @@ const Page = () => {
                 {profile[0]?.linkedin && (
                   <li className="border-2 border-[#565656] p-4 rounded-full">
                    
-                    <a href={`${profile[0]?.fbLink}`}>
+                    <a href={`${profile[0]?.linkedin}`}>
                     <SocialIcon network="linkedin" />
                     </a>
                     
@@ -232,6 +233,12 @@ const Page = () => {
                 placeholder="Enter Your designation"
               />
               <label className="block mb-2">Designation</label>
+              <input
+                {...register("designation")}
+                defaultValue={profile[0]?.designation}
+                className="w-full border p-2 rounded mb-3"
+              />
+              <label className="block mb-2">Type your phone number</label>
               <input
                 {...register("designation")}
                 defaultValue={profile[0]?.designation}

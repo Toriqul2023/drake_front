@@ -71,7 +71,7 @@ const onSubmitUpdate = (data, id) => {
                     onClick={() => toggleUpdateForm(service._id, service)} 
                     className="bg-blue-500 text-white px-4 my-4 py-2 rounded"
                   >
-                    {updatedForm[service._id] ? "Hide Update Form" : "Update Experience"}
+                    {updatedForm[service._id] ? "Hide Update Form" : "Update Projects"}
                   </button>
 
                   {updatedForm[service._id] && (

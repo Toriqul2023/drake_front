@@ -13,7 +13,7 @@ const Page = () => {
   const { user } = useContext(MyContext);
   const [profileImage, setProfileImage] = useState();
   const [profileData, setProfileData] = useState(false);
-  const [aboutData, setAboutData] = useState(false);
+  
   const [introData, setIntroData] = useState(false);
   const [workData, setWorkData] = useState(false);
   const [completedSections, setCompletedSections] = useState([]);
@@ -54,23 +54,7 @@ const Page = () => {
     reset:resetWork,
   } = useForm(formOptions);
 
-  const onSubmitAbout = (data) => {
-    axios.post('https://nfc-back-2.onrender.com/about', {
-      title: data?.title,
-      shortTitle: data?.shortTitle,
-      userName: username,
-    }).then(res => {
-        if((res.data?.count)>0){
-        toast.error("You already submitted")
-      }
-      else{
-        toast.success('About section submitted successfully!'); // Show success toast
-        console.log(res.data);
-        setAboutData(true);
-      }
-    });
-  };
-
+  
   const onSubmitIntro = (data) => {
     axios.post('https://nfc-back-2.onrender.com/intro', {
       userName: username,
@@ -157,7 +141,7 @@ const Page = () => {
   };
 
   const checkCompletion = () => {
-    if ((profileData && aboutData && introData && workData && projectData) || workData || projectData) {
+    if ((profileData  && introData && workData && projectData) || workData || projectData) {
       const generatedLink = `https://nfc-rho-one.vercel.app/${username}`;
       setProfileLink(generatedLink);
       setIsModalOpen(true); 
@@ -206,16 +190,7 @@ const Page = () => {
         </div>
       </form>
 
-      {/* About Section */}
-      <form onSubmit={handleSubmitAbout(onSubmitAbout)} className='mb-6'>
-        <h2 className='text-lg font-medium mb-2'>About You</h2>
-        <input className='input-field' {...registerAbout('title', { required: true })} placeholder='Enter a heading Title' />
-        <input className='input-field' {...registerAbout('shortTitle', { required: true })} placeholder='Tell me about your self' />
-        <div className='flex gap-2'>
-          <button type='submit' className='btn-primary'>Submit</button>
-          
-        </div>
-      </form>
+    
 
       {/* Work Section */}
       <form onSubmit={handleSubmitWork(onSubmitWork)} className='mb-6'>
@@ -257,7 +232,7 @@ const Page = () => {
 
       {/* Toast container */}
       <button onClick={checkCompletion} className={`btn-primary ${
-    (profileData && aboutData && introData && workData && projectData) || workData|| projectData
+    (profileData  && introData && workData && projectData) || workData|| projectData
       ? ''
       : 'opacity-50 cursor-not-allowed'
   }`}>Complete</button>

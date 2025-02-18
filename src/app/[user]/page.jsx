@@ -61,7 +61,9 @@ const Page = () => {
 
       const blob = new Blob([response.data], { type: "text/vcard" });
       const link = document.createElement("a");
+
       link.href = URL.createObjectURL(blob);
+      
       link.download = `${userName.replace(/\s+/g, "_")}.vcf`;
       document.body.appendChild(link);
       link.click();
@@ -207,7 +209,7 @@ const Page = () => {
 
         <div className="col-span-2 lg:pl-[200px]">
           <Introduce userName={userName} />
-          <Abouts userName={userName} />
+         
           <Experience userName={userName} />
           <Services userName={userName} />
         </div>

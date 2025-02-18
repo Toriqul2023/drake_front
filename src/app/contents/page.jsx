@@ -7,10 +7,19 @@ import { ToastContainer, toast } from 'react-toastify'; // Import toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 import './style.css';
 import Private from '../Private';
+import jsPDF from 'jspdf';
 
 const Page = () => {
   const { user } = useContext(MyContext);
   const [profileImage, setProfileImage] = useState();
+  const [profileData, setProfileData] = useState(null);
+  const [aboutData, setAboutData] = useState(null);
+  const [introData, setIntroData] = useState(null);
+  const [workData, setWorkData] = useState(null);
+  const [completedSections, setCompletedSections] = useState([]);
+  const [projectData, setProjectData] = useState(null);
+  const [activeForm, setActiveForm] = useState(null);
+  const [isPresent, setIsPresent] = useState(false);
 
   const formOptions = { mode: 'onBlur' };
   const {
@@ -40,7 +49,8 @@ const Page = () => {
   const {
     register: registerWork,
     handleSubmit: handleSubmitWork,
-    formState: { errors: errorsWork }
+    formState: { errors: errorsWork },
+    reset:resetWork,
   } = useForm(formOptions);
 
   const onSubmitAbout = (data) => {
@@ -55,6 +65,7 @@ const Page = () => {
       else{
         toast.success('About section submitted successfully!'); // Show success toast
         console.log(res.data);
+        setAboutData(data);
       }
     });
   };
@@ -73,6 +84,7 @@ const Page = () => {
       else{
         toast.success('Intro section submitted successfully!'); // Show success toast
         console.log(res.data);
+        setIntroData(data);
       }
     
     });
@@ -108,7 +120,7 @@ const Page = () => {
       }
       else{
         toast.success('Profile submitted successfully!'); // Show success toast
-        console.log(res);
+        setProfileData(data);
       }
      
     });
@@ -117,15 +129,18 @@ const Page = () => {
   const onSubmitWork = (data) => {
     axios.post('https://nfc-back-2.onrender.com/work', {
       sYear: data?.sYear,
-      lYear: data?.lYear,
+      lYear: isPresent ? 'Present' : data?.lYear,
       designation: data?.designation,
       company: data?.company,
       userName: user?.displayName
     }).then(res => {
       toast.success('Work experience submitted successfully!'); // Show success toast
-      console.log(res);
+      setWorkData(data);
+      resetWork()
+      
     });
   };
+  
 
   const onSubmitProject = (data) => {
     axios.post('https://nfc-back-2.onrender.com/project', {
@@ -135,21 +150,32 @@ const Page = () => {
       link: data?.link
     }).then(res => {
       toast.success('Project submitted successfully!'); // Show success toast
-      console.log(res);
+      setProjectData(data);
+     
     });
   };
+  const handleFocus = (formName) => {
+    setActiveForm(formName);
+  };
+  const handleBlur = () => {
+    setActiveForm(null);
+  };
+  
 
   return (
     <Private>
-        <div className='max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg'>
+        <div className=' mx-auto p-6  shadow-lg rounded-lg'>
       <h1 className='text-2xl font-semibold text-center mb-6'>Profile Settings</h1>
 
       {/* Profile Section */}
+      <div className={`transition-all duration-300 ${activeForm !== 'profile' && activeForm ? 'blur-sm' : ''}`}>
       <form onSubmit={handleSubmitProfile(onSubmitProfile)}>
         <h2 className='text-lg font-medium mb-2'>Profile Details</h2>
         <input className='input-field' {...registerProfile('nickName', { required: true })} placeholder='Nickname' />
         <input className='input-field' {...registerProfile('designation', { required: true })} placeholder='Designation' />
-        <input type='file' className='input-field' {...registerProfile('image', { required: true })} />
+        <label htmlFor="image">Add your Image</label>
+        <input id= "image" type='file' className='input-field' {...registerProfile('image', { required: true })} />
+
         <input className='input-field' {...registerProfile('address', { required: true })} placeholder='Enter Address' />
         <input className='input-field' {...registerProfile('fbLink')} placeholder='Facebook Link' />
         <input className='input-field' {...registerProfile('linkedin')} placeholder='LinkedIn Link' />
@@ -157,12 +183,14 @@ const Page = () => {
         <input className='input-field' {...registerProfile('twitter')} placeholder='Twitter Link' />
         <button type='submit' className='btn-primary'>Submit Profile</button>
       </form>
+      </div>
+      
 
       {/* intro */}
       <form onSubmit={handleSubmitIntro(onSubmitIntro)} className='mb-6'>
         <h2 className='text-lg font-medium mb-2'>Intro </h2>
         <input className='input-field' {...registerIntro('heading', { required: true })} placeholder='Enter Your nickname' />
-        <input className='input-field' {...registerIntro('metaInfo', { required: true })} placeholder='' />
+        <input className='input-field' {...registerIntro('metaInfo', { required: true })} placeholder='Write a short introduction about yourself' />
         <input className='input-field' {...registerIntro('experience', { required: true })} placeholder='Enter your work experience' />
         <input className='input-field' {...registerIntro('projects', { required: true })} placeholder='Enter how many projects you have completed' />
         <div className='flex gap-2'>
@@ -175,7 +203,7 @@ const Page = () => {
       <form onSubmit={handleSubmitAbout(onSubmitAbout)} className='mb-6'>
         <h2 className='text-lg font-medium mb-2'>About You</h2>
         <input className='input-field' {...registerAbout('title', { required: true })} placeholder='Enter Heading Title' />
-        <input className='input-field' {...registerAbout('shortTitle', { required: true })} placeholder='Enter Short Title' />
+        <input className='input-field' {...registerAbout('shortTitle', { required: true })} placeholder='Tell me about your self' />
         <div className='flex gap-2'>
           <button type='submit' className='btn-primary'>Submit</button>
           
@@ -184,21 +212,39 @@ const Page = () => {
 
       {/* Work Section */}
       <form onSubmit={handleSubmitWork(onSubmitWork)} className='mb-6'>
-        <h2 className='text-lg font-medium mb-2'>Work Experience</h2>
+        <h3 className='text-lg font-medium mb-2'>Work Experience</h3>
+        <label className='text-white my-4'>You can add multiple work experience </label>
         <input className='input-field' {...registerWork('sYear', { required: true })} placeholder='Start Year' />
-        <input className='input-field' {...registerWork('lYear', { required: true })} placeholder='End Year' />
+        <input 
+        className="input-field" 
+        {...registerWork('lYear', { required: !isPresent })} 
+        placeholder="End Year" 
+        disabled={isPresent}
+      />
+           <div className="flex items-center gap-2 my-4">
+     
+        <label htmlFor="present" className="text-white mt-[-3px]">If you currently in work select the box</label>
+        <input 
+          type="checkbox" 
+          id="present" 
+          checked={isPresent} 
+          onChange={() => setIsPresent(!isPresent)} 
+           className="h-5 w-5 text-blue-500"
+        />
+      </div>
         <input className='input-field' {...registerWork('designation', { required: true })} placeholder='Designation' />
         <input className='input-field' {...registerWork('company', { required: true })} placeholder='Company Name' />
-        <button type='submit' className='btn-primary'>Submit Work</button>
+        <button type='submit' className='btn-primary'>Add Work</button>
       </form>
 
       {/* Project Section */}
       <form onSubmit={handleSubmitProject(onSubmitProject)} className='mb-6'>
         <h2 className='text-lg font-medium mb-2'>Project</h2>
+        <label className='my-4' htmlFor="">You can add multiple projects</label>
         <input className='input-field' {...registerProject('title', { required: true })} placeholder='Title' />
-        <input className='input-field' {...registerProject('description', { required: true })} placeholder='Description' />
+        <input className='input-field' {...registerProject('description', { required: true })} placeholder='Describe your key projects' />
         <input className='input-field' {...registerProject('link', { required: true })} placeholder='Project Link' />
-        <button type='submit' className='btn-primary'>Submit Work</button>
+        <button type='submit' className='btn-primary'>Add experience</button>
       </form>
 
       {/* Toast container */}

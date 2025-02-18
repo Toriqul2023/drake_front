@@ -117,7 +117,7 @@ const Page = () => {
 
   return (
     <>
-    {user?.email && (<><button onClick={logOut}>Log out</button></>)}
+    {user?.email && (<><button className='mx-auto d-block' onClick={logOut}>Log out</button></>)}
       <video className="body-overlay" loop muted autoPlay>
         <source
           src="https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video4.mp4"

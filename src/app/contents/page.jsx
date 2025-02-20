@@ -239,7 +239,7 @@ const Page = () => {
      {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h2 className="text-xl font-semibold text-black">Your Profile is Ready</h2>
+              <h2 className="text-xl font-semibold text-black">Congratulation!!Your Profile is Ready</h2>
               <p className='text-black'>Provide this link to us</p>
               <p className="mt-2">
                 <a

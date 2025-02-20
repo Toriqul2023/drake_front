@@ -208,6 +208,7 @@ const Page = () => {
         </div>
 
         <div className="col-span-2 lg:pl-[200px]">
+          
           <Introduce userName={userName} />
          
           <Experience userName={userName} />

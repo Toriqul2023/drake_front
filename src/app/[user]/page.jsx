@@ -120,10 +120,14 @@ const Page = () => {
 
   return (
     <>
-    {user?.email && (<><div className='flex justify-end'>
-      <button className='mx-auto d-block' onClick={logOut}>Log out
+    {user?.email && (<><div className=' flex justify-between bg-green-500 p-5'>
+      <Link className='bg-green-800 p-3' href={'/contents'}>Update contents</Link>
+      <h1 className='mx-auto text-3xl text-black'>This portion only visible when you are logged in</h1>
+      
+      <button className='bg-green-800 p-3' onClick={logOut}>Log out
 
       </button>
+     
       </div></>)}
       <video className="body-overlay" loop muted autoPlay>
         <source
@@ -225,11 +229,11 @@ const Page = () => {
 
       {/* Blur Effect & Form Popup */}
       {profileForm && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 backdrop-blur-md flex items-center justify-center z-50">
+        <div className="fixed p-5 top-0 left-0 w-full h-full bg-black bg-opacity-20 backdrop-blur-md flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg w-[400px] relative">
             <button
               onClick={() => setProfileForm(false)}
-              className="absolute top-2 right-2 text-xl"
+              className="absolute top-5 right-2 text-xl"
             >
               ❌
             </button>

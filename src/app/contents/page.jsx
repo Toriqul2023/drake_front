@@ -194,6 +194,7 @@ const Page = () => {
 
       {/* Work Section */}
       <form onSubmit={handleSubmitWork(onSubmitWork)} className='mb-6'>
+      <label className='text-green-500' htmlFor="">*If you don't have any work experience. No need to fullfill the form*</label>
         <h3 className='text-lg font-medium mb-2'>Work Experience</h3>
         <label className='text-white my-4'>You can add multiple work experience </label>
         <input className='input-field' {...registerWork('sYear', { required: true })} placeholder='Start Year' />
@@ -214,28 +215,33 @@ const Page = () => {
            className="h-5 w-5 text-blue-500"
         />
       </div>
-        <input className='input-field' {...registerWork('designation', { required: true })} placeholder='Designation' />
-        <input className='input-field' {...registerWork('company', { required: true })} placeholder='Company Name' />
+        <input className='input-field' {...registerWork('designation',)} placeholder='Designation' />
+        <input className='input-field' {...registerWork('company',)} placeholder='Company Name' />
         <button type='submit' className='btn-primary'>Add Work</button>
       </form>
 
       {/* Project Section */}
       <form onSubmit={handleSubmitProject(onSubmitProject)} className='mb-6'>
+      
+        <label className='text-green-500' htmlFor="">*If you don't have any projects. No need to fullfill the form*</label>
         <h2 className='text-lg font-medium '>Project</h2>
         <label className='my-4 ' htmlFor="">You can add multiple projects</label>
-        <input className='input-field' {...registerProject('title', { required: true })} placeholder='Enter a project title' />
+        <input className='input-field' {...registerProject('title', )} placeholder='Enter a project title' />
         <label htmlFor=""></label>
-        <textarea className='input-field' {...registerProject('description', { required: true })} placeholder='Describe your  project' />
-        <input className='input-field' {...registerProject('link', { required: true })} placeholder='Project Link' />
+        <textarea className='input-field' {...registerProject('description', )} placeholder='Describe your  project' />
+        <input className='input-field' {...registerProject('link',)} placeholder='Project Link' />
         <button type='submit' className='btn-primary'>Add experience</button>
       </form>
 
       {/* Toast container */}
-      <button onClick={checkCompletion} className={`btn-primary ${
-    (profileData  && introData && workData && projectData) || workData|| projectData
+      <div className='flex justify-center'>
+      <button onClick={checkCompletion} className={`btn-primary lg:w-[500px] mb-5 text-center ${
+    (profileData  && introData) || workData|| projectData
       ? ''
       : 'opacity-50 cursor-not-allowed'
   }`}>Complete</button>
+      </div>
+      
      {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-6 rounded-lg shadow-lg">

@@ -73,7 +73,7 @@ const onSubmitUpdate = (data, id) => {
                         onClick={() => toggleUpdateForm(service._id, service)} 
                         className="bg-blue-500 text-white px-4 my-4 py-2 rounded"
                       >
-                        {updatedForm[service._id] ? "Hide Update Form" : "Update Projects"}
+                        {updatedForm[service._id] ? "Hide Update Form" : "Edit Projects"}
                       </button>
     
                       {updatedForm[service._id] && (
@@ -88,7 +88,7 @@ const onSubmitUpdate = (data, id) => {
                           />
                           <div>
                           <textarea
-                            className='text-black p-2 m-4 ml-0' 
+                            className='text-black p-2 m-4 ml-0 h-32 w-[100%]' 
                             {...register("description")} 
                            placeholder='Enter a short decription of project'
                             
@@ -103,7 +103,7 @@ const onSubmitUpdate = (data, id) => {
                           />
                         
                           <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded mt-2">
-                            Submit Update
+                            Submit
                           </button>
                         </form>
                       )}

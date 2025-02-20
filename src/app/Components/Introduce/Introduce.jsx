@@ -41,7 +41,7 @@ const Introduce = ({userName}) => {
          <div className=''>
             <h1 className='lg:text-[70px] text-[30px] mb-5 font-light'>Hello! This is me,<span className='text-green-600'>{intros[0]?.heading}</span></h1>
             
-            <p className='max-w-[488px] text-gray-400 my-5 mb-[50px]'>{intros[0]?.metaInfo}</p>
+            <p className=' text-gray-400 my-5 mb-[50px]'>{intros[0]?.metaInfo}</p>
             
           
            

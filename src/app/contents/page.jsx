@@ -60,7 +60,7 @@ const Page = () => {
       userName: username,
       heading: data?.heading,
       metaInfo:data?.metaInfo,
-      experince: data?.experience,
+      experience: data?.experience,
       projects: data?.projects,
     }).then(res => {
       if((res.data?.count)>0){
@@ -240,7 +240,7 @@ const Page = () => {
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h2 className="text-xl font-semibold text-black">Congratulation!!Your Profile is Ready</h2>
-              <p className='text-black'>Provide this link to us</p>
+              <p className='text-black'>Provide this link to NFC Bangladsesh</p>
               <p className="mt-2">
                 <a
                   href={profileLink}

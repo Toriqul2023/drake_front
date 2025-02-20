@@ -120,15 +120,27 @@ const Page = () => {
 
   return (
     <>
-    {user?.email && (<><div className=' flex justify-between bg-green-500 p-5'>
-      <Link className='bg-green-800 p-3' href={'/contents'}>Update contents</Link>
-      <h1 className='mx-auto text-3xl text-black'>This portion only visible when you are logged in</h1>
-      
-      <button className='bg-green-800 p-3' onClick={logOut}>Log out
-
-      </button>
-     
-      </div></>)}
+    {user?.email && (<>
+      <div className="navbar bg-base-100">
+  <div className="flex-1">
+    <a className="btn btn-ghost text-xl">daisyUI</a>
+  </div>
+  <div className="flex-none">
+    <ul className="menu menu-horizontal px-1">
+      <li><Link>Link</Link></li>
+      <li>
+        <details>
+          <summary>Parent</summary>
+          <ul className="bg-base-100 rounded-t-none p-2">
+            <li><a>Link 1</a></li>
+            <li><a>Link 2</a></li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+  </div>
+</div>
+     </>)}
       <video className="body-overlay" loop muted autoPlay>
         <source
           src="https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video4.mp4"
@@ -140,7 +152,7 @@ const Page = () => {
 
      
         <div className="pt-[50px]">
-          <div className="lg:fixed border w-[400px] rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
+          <div className="lg:fixed border lg:w-[400px] w-[100%] rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
             <div className="flex justify-between items-center py-5">
               <h1 className="text-4xl">{userName}</h1>
               <p>{profile[0]?.designation}</p>

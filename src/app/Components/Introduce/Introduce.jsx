@@ -39,9 +39,9 @@ const Introduce = ({userName}) => {
       <button className="border text-[14px] rounded-3xl py-2  px-5 "><FontAwesomeIcon style={{marginRight:'5px'}} icon={faHouse} /> 
      INTRODUCE</button>
          <div className=''>
-            <h1 className='lg:text-[60px] text-[30px] mb-5 font-light'>Hello! This is me,<span className='text-green-600'>{intros[0]?.heading}</span></h1>
+            <h1 className='lg:text-[60px] text-[30px]  mb-5 font-light'>Hello! This is me,<span className='text-green-600'>{intros[0]?.heading}</span></h1>
             
-            <p className=' text-gray-400 my-5 mb-[50px]'>{intros[0]?.metaInfo}</p>
+            <p className=' text-gray-400 my-5 mb-[50px] w-[100%]'>{intros[0]?.metaInfo}</p>
             
           
            

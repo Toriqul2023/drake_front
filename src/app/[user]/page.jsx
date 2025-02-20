@@ -152,7 +152,7 @@ const Page = () => {
 
      
         <div className="pt-[50px]">
-          <div className="lg:fixed border lg:w-[400px] w-[100%] rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
+          <div className="lg:fixed border lg:w-[400px]  rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
             <div className="flex justify-between items-center py-5">
               <h1 className="text-4xl">{userName}</h1>
               <p>{profile[0]?.designation}</p>
@@ -176,7 +176,7 @@ const Page = () => {
                 {profile[0]?.fbLink && (
                   <li className="border-2 border-[#565656] p-4 rounded-full">
                     <a href={`${profile[0]?.fbLink}`}>
-                    <SocialIcon network="facebook"  />
+                    <SocialIcon network="facebook"  size={20} />
                     </a>
                   </li>
                 )}

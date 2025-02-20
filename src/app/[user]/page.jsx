@@ -165,7 +165,7 @@ const Page = () => {
               height={500}
               width={500}
             />
-            <div className="text-center w-[80%]">
+            <div className="text-center ">
               <h3 className="text-2xl">{profile[0]?.nickName}</h3>
              
               <p className="text-gray-400 pb-[20px]">

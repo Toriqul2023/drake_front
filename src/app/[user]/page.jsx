@@ -120,7 +120,11 @@ const Page = () => {
 
   return (
     <>
-    {user?.email && (<><button className='mx-auto d-block' onClick={logOut}>Log out</button></>)}
+    {user?.email && (<><div className='flex justify-end'>
+      <button className='mx-auto d-block' onClick={logOut}>Log out
+
+      </button>
+      </div></>)}
       <video className="body-overlay" loop muted autoPlay>
         <source
           src="https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video4.mp4"
@@ -186,9 +190,10 @@ const Page = () => {
                   </li>
                 )}
               </ul>
+              <div className='flex justify-center'>
               <button
                 onClick={handleDownloadVCard}
-                className="rounded-3xl bg-[#28E98C] px-[35%] py-3 text-black"
+                className="mt-3 mr-3 bg-[#16A34A] text-white px-4 py-2 rounded-lg"
               >
                 Contact Me
               </button>
@@ -197,12 +202,14 @@ const Page = () => {
                 <>
                   <button
                     onClick={() => setProfileForm(!profileForm)}
-                    className="mt-3 bg-gray-700 text-white px-4 py-2 rounded-lg position-absolutue"
+                    className="mt-3 bg-gray-700 text-white px-4 py-2 rounded-lg"
                   >
-                    {profileForm ? "Hide" : "Update"}
+                    {profileForm ? "Hide" : "Edit Profile"}
                   </button>
                 </>
               )}
+              </div>
+           
             </div>
           </div>
         </div>

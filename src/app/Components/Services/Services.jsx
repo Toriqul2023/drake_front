@@ -56,14 +56,14 @@ const onSubmitUpdate = (data, id) => {
     <>
     {
       services.length>0 && (
-        <div className='mb-[150px] py-5' id="Service">
+        <div className='mb-[50px] py-5' id="Service">
         <button className="border text-[14px] rounded-3xl mb-[20px] py-2  px-5">Projects</button>
         <h1 className='lg:text-6xl my-3 mb-[50px] font-light'>My <span className='text-[#28E98C]'> projects</span> </h1>
         <div>
           {
-                 services.map(service=>( <div key={service?._id}  className='border border-[#565656] rounded-3xl my-4 pl-[30px] pt-[40px] pb-[30px]   hover:border-[#28E98C]'>
+                 services.map(service=>( <div key={service?._id}  className='border border-[#565656] rounded-3xl my-4 px-[30px] pt-[40px] pb-[30px]   hover:border-[#28E98C]'>
                   <h3 className='text-3xl font-light mb-5'>{service?.title}</h3>
-                  <p className='text-gray-400 mb-[50px]'>{service.description}</p>
+                  <p className='text-gray-400 mb-[50px] text-start'>{service.description}</p>
                   <div>
                     
                   

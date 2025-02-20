@@ -53,7 +53,7 @@ const Experience = ({ userName }) => {
   return (
     <>
     {
-      works.length>0 && (<div className='mb-[200px] py-5' id="Resume">
+      works.length>0 && (<div className=' py-[50px]' id="Resume">
         <button className="border border-[#565656] text-[14px] rounded-3xl mb-[20px] py-2 px-5">RESUME</button>
         <h1 className='lg:text-6xl my-5 mb-[50px] font-light'>Work <span className='text-[#28E98C]'>Experience</span></h1>
         <div className='pl-[80px] pb-5 border-l border-[#565656] relative'>
@@ -70,9 +70,9 @@ const Experience = ({ userName }) => {
                   <>
                     <button 
                       onClick={() => toggleUpdateForm(work._id, work)} 
-                      className="bg-blue-500 text-white px-4 my-4 py-2 rounded"
+                      className="bg-[#16A34A] text-white px-4 my-4 py-2 rounded"
                     >
-                      {updatedForm[work._id] ? "Hide Update Form" : "Update Experience"}
+                      {updatedForm[work._id] ? "Hide Update Form" : "Edit your job experience"}
                     </button>
   
                     {updatedForm[work._id] && (

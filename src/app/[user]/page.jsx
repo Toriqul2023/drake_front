@@ -127,7 +127,7 @@ const Page = () => {
   </div>
   <div className="flex-none">
     <ul className="menu menu-horizontal px-1">
-      <li><Link>Link</Link></li>
+      <li><Link href={''}>Link</Link></li>
       <li>
         <details>
           <summary>Parent</summary>

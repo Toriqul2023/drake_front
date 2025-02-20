@@ -55,7 +55,7 @@ const onSubmitUpdate = (data, id) => {
   return (
     <>
     {
-      services>0 && (
+      services.length>0 && (
         <div className='mb-[150px] py-5' id="Service">
         <button className="border text-[14px] rounded-3xl mb-[20px] py-2  px-5">Projects</button>
         <h1 className='lg:text-6xl my-3 mb-[50px] font-light'>My <span className='text-[#28E98C]'> projects</span> </h1>

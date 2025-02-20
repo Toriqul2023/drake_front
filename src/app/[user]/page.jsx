@@ -172,7 +172,7 @@ const Page = () => {
                 {profile[0]?.address}
               </p>
 
-              <ul className="flex justify-center my-[20px] gap-3">
+              <ul className="flex w-[100%] justify-center my-[20px] gap-3">
                 {profile[0]?.fbLink && (
                   <li className="border-2 border-[#565656] p-4 rounded-full">
                     <a href={`${profile[0]?.fbLink}`}>

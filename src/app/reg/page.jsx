@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from "react-hook-form";
 import { MyContext } from '../context/context';
 import axios from 'axios';
@@ -10,22 +10,44 @@ import Link from 'next/link';
 const Page = () => {
   const { user, handleReg, updateName } = useContext(MyContext);
   const [error, setError] = useState('');
+  const [usernameExists, setUsernameExists] = useState(false);
   const router = useRouter();
+  
   const [success, setSuccess] = useState(''); // State for success message
    console.log(router)
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors }
+   
   } = useForm();
-
+  let username = watch("userName");
+  username=username ? username.trim().toLowerCase():'';
+ console.log(username)
+ useEffect(()=>{
+      axios.get(`https://nfc-back-2.onrender.com/${username}`)
+      .then((res)=>{
+        if(res.data.count>0){
+          setUsernameExists(true)
+        }
+        else{
+          setUsernameExists(false);
+        }
+      })
+ },[username])
   const onSubmit = async (data) => {
     setError('');
     setSuccess(''); // Reset messages before request
+    const sanitizedUsername = data.userName.trim().toLowerCase();
 
+    if (usernameExists) {
+      setError("Username already exists.");
+      return; // Stop if the username exists
+    }
     await handleReg(data?.email, data?.passwords)
       .then(() => {
-        updateName(data.userName);
+        updateName(sanitizedUsername);
         axios.post('https://nfc-back-2.onrender.com/reginfo', {
           userName: data?.userName,
           emails: data?.email,
@@ -47,6 +69,7 @@ const Page = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-900">
+      <p>{username}</p>
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold text-white text-center mb-6">Register</h2>
         
@@ -58,6 +81,7 @@ const Page = () => {
           <div>
             <label className="block text-gray-400">Username</label>
             <input 
+            
               type="text"
               {...register("userName", { required: true })}
               className="w-full p-2 mt-1 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"

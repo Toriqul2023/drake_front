@@ -63,7 +63,7 @@ const onSubmitUpdate = (data, id) => {
           {
                  services.map(service=>( <div key={service?._id}  className='border border-[#565656] rounded-3xl my-4 px-[30px] pt-[40px] pb-[30px]   hover:border-[#28E98C]'>
                   <h3 className='text-3xl font-light mb-5'>{service?.title}</h3>
-                  <p className='text-gray-400 mb-[50px] text-start'>{service.description}</p>
+                  <p className='text-gray-400 mb-[50px] text-justify'>{service.description}</p>
                   <div>
                     
                   

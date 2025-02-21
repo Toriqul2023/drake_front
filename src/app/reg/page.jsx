@@ -96,11 +96,13 @@ const Page = () => {
             className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-all">
             Register
           </button>
-          <Link href={'/login'}> <button 
-            type="submit" 
-            className="w-full mt-5 bg-blue-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-all">
-            Log In
-          </button></Link>
+         
+          <Link className='text-blue-600 my-2' href={'/login'}> 
+          
+           Already have an account
+           
+           
+          </Link>
         </form>
       </div>
     </div>

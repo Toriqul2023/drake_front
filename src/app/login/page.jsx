@@ -67,16 +67,17 @@ const Login = () => {
           {/* Submit Button */}
           <button 
             type="submit" 
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition-all">
+            className="w-full bg-green-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition-all">
             Login
           </button>
         
         </form>
-        <Link href={'/reg'}><button 
-            
-            className="w-full mt-5 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-all">
-            Register
-          </button></Link>
+        <Link className='text-blue-600 my-2 block' href={'/reg'}> 
+          
+          Don't have any account?
+          
+          
+         </Link>
         
       </div>
     </div>

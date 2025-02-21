@@ -120,203 +120,193 @@ const Page = () => {
 
   return (
     <>
-    {user?.email && (<>
-      <div className="navbar bg-base-100">
-  <div className="flex-1">
-    <a className="btn btn-ghost text-xl">daisyUI</a>
-  </div>
-  <div className="flex-none">
-    <ul className="menu menu-horizontal px-1">
-      <li><Link href={''}>Link</Link></li>
-      <li>
-        <details>
-          <summary>Parent</summary>
-          <ul className="bg-base-100 rounded-t-none p-2">
-            <li><a>Link 1</a></li>
-            <li><a>Link 2</a></li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </div>
+<div className="fixed top-0 left-0 w-full bg-gray-800 text-white px-4 py-3 shadow-md flex justify-end items-center z-50">
+  <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mr-2 transition duration-300">
+    Button 1
+  </button>
+  <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
+    Button 2
+  </button>
 </div>
-     </>)}
+
       <video className="body-overlay" loop muted autoPlay>
         <source
           src="https://wpriverthemes.com/drake/wp-content/themes/drake/assets/images/video4.mp4"
           type="video/mp4"
         />
       </video>
-    
-      <div className="row grid lg:grid-cols-4 grid-cols-1 px-5">
+      
+      <div className="row grid lg:grid-cols-4 grid-cols-1 px-5 mt-[100px]">
 
      
-        <div className="pt-[50px]">
-          <div className="lg:fixed border lg:w-[400px]  rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
-            <div className="flex justify-between items-center py-5">
-              <h1 className="text-4xl">{userName}</h1>
-              <p>{profile[0]?.designation}</p>
-            </div>
-   
-            <Image
-              className="rounded-3xl mb-[30px]"
-              src={profile[0]?.image}
-              unoptimized
-              height={500}
-              width={500}
-            />
-            <div className="text-center ">
-              <h3 className="text-2xl">{profile[0]?.nickName}</h3>
-             
-              <p className="text-gray-400 pb-[20px]">
-                {profile[0]?.address}
-              </p>
+<div className="pt-[50px]">
+  <div className="lg:fixed border lg:w-[400px]  rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
+    <div className="flex justify-between items-center py-5">
+      <h1 className="text-4xl">{userName}</h1>
+      <p>{profile[0]?.designation}</p>
+    </div>
 
-              <ul className="grid grid-cols-4 w-[100%]  justify-center my-[20px] gap-3">
-                {profile[0]?.fbLink && (
-                  <li className=" flex items-center justify-center">
-                    <a href={`${profile[0]?.fbLink}`}>
-                    <SocialIcon network="facebook"  size={20} />
-                    </a>
-                  </li>
-                )}
-                {profile[0]?.insta && (
-                  <li className=" flex items-center justify-center">
-                    <a href={`${profile[0]?.insta}`}>
-                         <SocialIcon network="instagram"  />
-                    </a>
-                  </li>
-                )}
-                {profile[0]?.twitter && (
-                  <li className="l flex items-center justify-center">
-                    
-                    <a href={`${profile[0]?.twitter}`}>
-                    <SocialIcon network="twitter"/>
-                    </a>
-                    
-                  </li>
-                )}
-                {profile[0]?.linkedin && (
-                  <li className=" flex items-center justify-center">
-                   
-                    <a href={`${profile[0]?.linkedin}`}>
-                    <SocialIcon network="linkedin" />
-                    </a>
-                    
-                  </li>
-                )}
-              </ul>
-              <div className='flex justify-center'>
-              <button
-                onClick={handleDownloadVCard}
-                className="mt-3 mr-3 bg-[#16A34A] text-white px-4 py-2 rounded-lg"
-              >
-                Contact Me
-              </button>
-  
-              {user?.email && (
-                <>
-                  <button
-                    onClick={() => setProfileForm(!profileForm)}
-                    className="mt-3 bg-gray-700 text-white px-4 py-2 rounded-lg"
-                  >
-                    {profileForm ? "Hide" : "Edit Profile"}
-                  </button>
-                </>
-              )}
-              </div>
+    <Image
+      className="rounded-3xl mb-[30px]"
+      src={profile[0]?.image}
+      unoptimized
+      height={500}
+      width={500}
+    />
+    <div className="text-center ">
+      <h3 className="text-2xl">{profile[0]?.nickName}</h3>
+     
+      <p className="text-gray-400 pb-[20px]">
+        {profile[0]?.address}
+      </p>
+
+      <ul className="grid grid-cols-4 w-[100%]  justify-center my-[20px] gap-3">
+        {profile[0]?.fbLink && (
+          <li className=" flex items-center justify-center">
+            <a href={`${profile[0]?.fbLink}`}>
+            <SocialIcon network="facebook"  size={20} />
+            </a>
+          </li>
+        )}
+        {profile[0]?.insta && (
+          <li className=" flex items-center justify-center">
+            <a href={`${profile[0]?.insta}`}>
+                 <SocialIcon network="instagram"  />
+            </a>
+          </li>
+        )}
+        {profile[0]?.twitter && (
+          <li className="l flex items-center justify-center">
+            
+            <a href={`${profile[0]?.twitter}`}>
+            <SocialIcon network="twitter"/>
+            </a>
+            
+          </li>
+        )}
+        {profile[0]?.linkedin && (
+          <li className=" flex items-center justify-center">
            
-            </div>
-          </div>
-        </div>
+            <a href={`${profile[0]?.linkedin}`}>
+            <SocialIcon network="linkedin" />
+            </a>
+            
+          </li>
+        )}
+      </ul>
+      <div className='flex justify-center'>
+      <button
+        onClick={handleDownloadVCard}
+        className="mt-3 mr-3 bg-[#16A34A] text-white px-4 py-2 rounded-lg"
+      >
+        Contact Me
+      </button>
 
-        <div className="col-span-2 lg:pl-[200px]">
-          
-          <Introduce userName={userName} />
-         
-          <Experience userName={userName} />
-          <Services userName={userName} />
-        </div>
-      </div>
-
-      {/* Blur Effect & Form Popup */}
-      {profileForm && (
-        <div className="fixed p-5 top-0 left-0 w-full h-full bg-black bg-opacity-20 backdrop-blur-md flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg w-[400px] relative">
-            <button
-              onClick={() => setProfileForm(false)}
-              className="absolute top-5 right-2 text-xl"
-            >
-              ❌
-            </button>
-            <h2 className="text-xl text-black font-semibold mb-4">Update Profile</h2>
-            <form className="text-black" onSubmit={handleSubmit(onSubmit)}>
-              <label className="block mb-2 text-black">Enter your nickname</label>
-              <input
-                {...register("nickName")}
-                defaultValue={profile[0]?.nickName}
-                className="w-full border text-black p-2 rounded mb-3"
-                placeholder="Enter Your designation"
-              />
-              <label className="block mb-2">Designation</label>
-              <input
-                {...register("designation")}
-                defaultValue={profile[0]?.designation}
-                className="w-full border p-2 rounded mb-3"
-              />
-              <label className="block mb-2">Type your phone number</label>
-              <input
-                {...register("designation")}
-                defaultValue={profile[0]?.designation}
-                className="w-full border p-2 rounded mb-3"
-              />
-              <label className="block mb-2">Upload Your image</label>
-              <input
-              type="file"
-                {...register("image")}
-                
-                className="w-full border p-2 rounded mb-3"
-              />
-              <label className="block mb-2">Enter your address</label>
-              <input
-                {...register("address")}
-                defaultValue={profile[0]?.address}
-                className="w-full border p-2 rounded mb-3"
-              />
-              <label className="block mb-2">Facebook Link</label>
-              <input
-                {...register("fbLink")}
-                defaultValue={profile[0]?.fbLink}
-                className="w-full border p-2 rounded mb-3"
-              />
-              <label className="block mb-2">Linkedin</label>
-              <input
-                {...register("linkedin")}
-                defaultValue={profile[0]?.linkedin}
-                className="w-full border p-2 rounded mb-3"
-              />
-              <label className="block mb-2">Instagram</label>
-              <input
-                {...register("insta")}
-                defaultValue={profile[0]?.insta}
-                className="w-full border p-2 rounded mb-3"
-              />
-              <label className="block mb-2">twitter</label>
-              <input
-                {...register("twitter")}
-                defaultValue={profile[0]?.twitter}
-                className="w-full border p-2 rounded mb-3"
-              />
-              <button
-                type="submit"
-                className="w-full bg-blue-500 text-white p-2 rounded mt-3"
-              >
-                Save Changes
-              </button>
-            </form>
-          </div>
-        </div>
+      {user?.email && (
+        <>
+          <button
+            onClick={() => setProfileForm(!profileForm)}
+            className="mt-3 bg-gray-700 text-white px-4 py-2 rounded-lg"
+          >
+            {profileForm ? "Hide" : "Edit Profile"}
+          </button>
+        </>
       )}
+      </div>
+   
+    </div>
+  </div>
+</div>
+
+<div className="col-span-2 lg:pl-[200px]">
+  
+  <Introduce userName={userName} />
+ 
+  <Experience userName={userName} />
+  <Services userName={userName} />
+</div>
+
+
+{/* Blur Effect & Form Popup */}
+{profileForm && (
+<div className="fixed p-5 top-0 left-0 w-full h-full bg-black bg-opacity-20 backdrop-blur-md flex items-center justify-center z-50">
+  <div className="bg-white p-6 rounded-lg w-[400px] relative">
+    <button
+      onClick={() => setProfileForm(false)}
+      className="absolute top-5 right-2 text-xl"
+    >
+      ❌
+    </button>
+    <h2 className="text-xl text-black font-semibold mb-4">Update Profile</h2>
+    <form className="text-black" onSubmit={handleSubmit(onSubmit)}>
+      <label className="block mb-2 text-black">Enter your nickname</label>
+      <input
+        {...register("nickName")}
+        defaultValue={profile[0]?.nickName}
+        className="w-full border text-black p-2 rounded mb-3"
+        placeholder="Enter Your designation"
+      />
+      <label className="block mb-2">Designation</label>
+      <input
+        {...register("designation")}
+        defaultValue={profile[0]?.designation}
+        className="w-full border p-2 rounded mb-3"
+      />
+      <label className="block mb-2">Type your phone number</label>
+      <input
+        {...register("designation")}
+        defaultValue={profile[0]?.designation}
+        className="w-full border p-2 rounded mb-3"
+      />
+      <label className="block mb-2">Upload Your image</label>
+      <input
+      type="file"
+        {...register("image")}
+        
+        className="w-full border p-2 rounded mb-3"
+      />
+      <label className="block mb-2">Enter your address</label>
+      <input
+        {...register("address")}
+        defaultValue={profile[0]?.address}
+        className="w-full border p-2 rounded mb-3"
+      />
+      <label className="block mb-2">Facebook Link</label>
+      <input
+        {...register("fbLink")}
+        defaultValue={profile[0]?.fbLink}
+        className="w-full border p-2 rounded mb-3"
+      />
+      <label className="block mb-2">Linkedin</label>
+      <input
+        {...register("linkedin")}
+        defaultValue={profile[0]?.linkedin}
+        className="w-full border p-2 rounded mb-3"
+      />
+      <label className="block mb-2">Instagram</label>
+      <input
+        {...register("insta")}
+        defaultValue={profile[0]?.insta}
+        className="w-full border p-2 rounded mb-3"
+      />
+      <label className="block mb-2">twitter</label>
+      <input
+        {...register("twitter")}
+        defaultValue={profile[0]?.twitter}
+        className="w-full border p-2 rounded mb-3"
+      />
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white p-2 rounded mt-3"
+      >
+        Save Changes
+      </button>
+    </form>
+  </div>
+</div>
+)}
+      </div>
+     
     </>
   );
 };

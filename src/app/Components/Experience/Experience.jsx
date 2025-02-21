@@ -56,7 +56,7 @@ const Experience = ({ userName }) => {
       works.length>0 && (<div className=' py-[50px]' id="Resume">
         <button className="border border-[#565656] text-[14px] rounded-3xl mb-[20px] py-2 px-5">RESUME</button>
         <h1 className='lg:text-6xl my-5 mb-[50px] font-light'>Work <span className='text-[#28E98C]'>Experience</span></h1>
-        <div className='pl-[80px] pb-5 border-l border-[#565656] relative'>
+        <div className='lg:pl-[80px] pb-5 border-l border-[#565656] relative'>
           {works.map(work => (
             <div key={work._id} className='framers w-[100%] mb-[50px] relative'>
               <p id='p1' className='text-gray-400'>{work?.sYear} - {work?.lYear || 'present'}</p>

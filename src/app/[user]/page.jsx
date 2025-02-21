@@ -172,23 +172,23 @@ const Page = () => {
                 {profile[0]?.address}
               </p>
 
-              <ul className="flex w-[100%] justify-center my-[20px] gap-3">
+              <ul className="flex flex-nowrap w-[100%] w-[100%] justify-center my-[20px] gap-3">
                 {profile[0]?.fbLink && (
-                  <li className="border-2 border-[#565656] p-4 rounded-full">
+                  <li className="border-2 border-[#565656] p-3 rounded-full flex items-center justify-center">
                     <a href={`${profile[0]?.fbLink}`}>
                     <SocialIcon network="facebook"  size={20} />
                     </a>
                   </li>
                 )}
                 {profile[0]?.insta && (
-                  <li className="border-2 border-[#565656] p-4 rounded-full">
+                  <li className="border-2 border-[#565656] p-3 rounded-full flex items-center justify-center">
                     <a href={`${profile[0]?.insta}`}>
                          <SocialIcon network="instagram"  />
                     </a>
                   </li>
                 )}
                 {profile[0]?.twitter && (
-                  <li className="border-2 border-[#565656] p-4 rounded-full">
+                  <li className="border-2 border-[#565656] p-3 rounded-full flex items-center justify-center">
                     
                     <a href={`${profile[0]?.twitter}`}>
                     <SocialIcon network="twitter"/>
@@ -197,7 +197,7 @@ const Page = () => {
                   </li>
                 )}
                 {profile[0]?.linkedin && (
-                  <li className="border-2 border-[#565656] p-4 rounded-full">
+                  <li className="border-2 border-[#565656] p-3 rounded-full flex items-center justify-center">
                    
                     <a href={`${profile[0]?.linkedin}`}>
                     <SocialIcon network="linkedin" />

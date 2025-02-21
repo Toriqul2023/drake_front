@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 import './style.css';
 import Private from '../Private';
 import jsPDF from 'jspdf';
+import Link from 'next/link';
 
 const Page = () => {
   const { user } = useContext(MyContext);
@@ -153,8 +154,9 @@ const Page = () => {
   return (
     <Private>
         <div className=' mx-auto p-6  shadow-lg rounded-lg'>
+          <button className='absolute top-[40px]' ><Link href={`${username}`}>Return To main page</Link></button>
       <h1 className='text-2xl font-semibold text-center mb-6'>At first time you have to complete every form.After then you can add more work and projects</h1>
-
+       
       {/* Profile Section */}
      
       <form onSubmit={handleSubmitProfile(onSubmitProfile)}>

@@ -26,9 +26,9 @@ const Page = () => {
   username=username ? username.trim().toLowerCase():'';
  console.log(username)
  useEffect(()=>{
-      axios.get(`https://nfc-back-2.onrender.com/${username}`)
+      axios.get(`https://nfc-back-2.onrender.com/reginfo?username=${username}`)
       .then((res)=>{
-        if(res.data.count>0){
+        if(res.data>0){
           setUsernameExists(true)
         }
         else{
@@ -69,7 +69,7 @@ const Page = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-900">
-      <p>{username}</p>
+      
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold text-white text-center mb-6">Register</h2>
         

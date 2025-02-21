@@ -172,7 +172,7 @@ const Page = () => {
                 {profile[0]?.address}
               </p>
 
-              <ul className="flex flex-nowrap w-[100%] w-[100%] justify-center my-[20px] gap-3">
+              <ul className="grid grid-cols-4 w-[100%]  justify-center my-[20px] gap-3">
                 {profile[0]?.fbLink && (
                   <li className="border-2 border-[#565656] p-3 rounded-full flex items-center justify-center">
                     <a href={`${profile[0]?.fbLink}`}>

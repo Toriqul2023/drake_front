@@ -161,12 +161,16 @@ const Page = () => {
      
       <form onSubmit={handleSubmitProfile(onSubmitProfile)}>
         <h2 className='text-lg font-medium mb-2'>Profile Details</h2>
+        <label htmlFor="">Enter your nickname</label>
         <input className='input-field' {...registerProfile('nickName', { required: true })} placeholder='Nickname' />
+        <label htmlFor="">Enter your nickname</label>
         <input className='input-field' {...registerProfile('designation', { required: true })} placeholder='Designation' />
+        <label htmlFor="">Enter your nickname</label>
         <input className='input-field' {...registerProfile('Phone', { required: true })} placeholder='Enter your phone number(01718******)' />
+        
         <label htmlFor="image">Add your Image</label>
         <input id= "image" type='file' className='input-field' {...registerProfile('image', { required: true })} />
-
+        <label htmlFor="">Enter your nickname</label>
         <input className='input-field' {...registerProfile('address', { required: true })} placeholder='Enter Address' />
         <input className='input-field' {...registerProfile('fbLink')} placeholder='Facebook Link' />
         <input className='input-field' {...registerProfile('linkedin')} placeholder='LinkedIn Link' />

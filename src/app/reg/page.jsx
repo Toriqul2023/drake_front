@@ -1,93 +1,117 @@
 'use client'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useCallback } from 'react'
 import { useForm } from "react-hook-form";
 import { MyContext } from '../context/context';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-
+import debounce from 'lodash.debounce';
 
 const Page = () => {
   const { user, handleReg, updateName } = useContext(MyContext);
   const [error, setError] = useState('');
   const [usernameExists, setUsernameExists] = useState(false);
+  const [loading, setLoading] = useState(false); 
   const router = useRouter();
-  
-  const [success, setSuccess] = useState(''); // State for success message
-   console.log(router)
+  const [success, setSuccess] = useState(''); 
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors }
-   
   } = useForm();
+
+  // Get the username as the user types
   let username = watch("userName");
-  username=username ? username.trim().toLowerCase():'';
- console.log(username)
- useEffect(()=>{
-      axios.get(`https://nfc-back-2.onrender.com/reginfo?username=${username}`)
-      .then((res)=>{
-        if(res.data>0){
-          setUsernameExists(true)
-        }
-        else{
-          setUsernameExists(false);
-        }
-      })
- },[username])
+  username = username ? username.trim().toLowerCase() : '';
+
+  // Function to check username availability
+  const checkUsername = async (name) => {
+    if (name.length < 3) {
+      setUsernameExists(false);
+      return;
+    }
+    try {
+      const res = await axios.get(`https://nfc-back-2.onrender.com/reginfo?username=${name}`);
+      console.log(res.data);
+      if (res.data.result && res.data.result.length > 0) {
+        setUsernameExists(true);
+      } else {
+        setUsernameExists(false);
+      }
+    } catch (err) {
+      console.error("Error checking username:", err);
+    }
+  };
+
+  // Debounce the checkUsername function
+  const debouncedCheck = useCallback(
+    debounce((name) => checkUsername(name), 500), []
+  );
+
+  // Use useEffect to call the debounced check
+  useEffect(() => {
+    debouncedCheck(username);
+  }, [username, debouncedCheck]);
+
   const onSubmit = async (data) => {
     setError('');
-    setSuccess(''); // Reset messages before request
+    setSuccess('');
+    setLoading(true);
     const sanitizedUsername = data.userName.trim().toLowerCase();
 
-    if (usernameExists) {
-      setError("Username already exists.");
-      return; // Stop if the username exists
-    }
-    await handleReg(data?.email, data?.passwords)
-      .then(() => {
-        updateName(sanitizedUsername);
-        axios.post('https://nfc-back-2.onrender.com/reginfo', {
-          userName: data?.userName,
-          emails: data?.email,
-          passwords: data?.passwords,
-        }).then(() => {
-          setSuccess("Account created successfully! 🎉"); 
-          setTimeout(() => {
-            router.push('/contents'); // Redirect after 2 seconds
-          }, 2000);// Show success message
-        }).catch(err => {
-          console.log(err);
-        });
-      })
-      .catch(err => {
-        console.log("Registration failed");
-        setError(err.code);
+    try {
+      if (usernameExists) {
+        setError("Username already exists. Try another.");
+        setLoading(false);
+        return;
+      }
+      
+      // Register with Firebase
+      await handleReg(data?.email, data?.passwords);
+      await updateName(sanitizedUsername);
+
+      // Save user info in your database
+      await axios.post('https://nfc-back-2.onrender.com/reginfo', {
+        userName: sanitizedUsername,
+        emails: data?.email,
+        passwords: data?.passwords,
       });
+
+      setSuccess("Account created successfully! 🎉");
+      setTimeout(() => {
+        router.push('/contents');
+      }, 2000);
+
+    } catch (err) {
+      console.error("Error:", err);
+      setError("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-900">
-      
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold text-white text-center mb-6">Register</h2>
-        
-        {success && <p className="text-green-500 text-sm text-center mb-4">{success}</p>} {/* Success Message */}
-        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>} {/* Error Message */}
 
+        {success && <p className="text-green-500 text-sm text-center mb-4">{success}</p>}
+        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+        
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Username Input */}
           <div>
             <label className="block text-gray-400">Username</label>
             <input 
-            
               type="text"
               {...register("userName", { required: true })}
               className="w-full p-2 mt-1 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your username"
             />
             {errors.userName && <p className="text-red-500 text-sm mt-1">Username is required</p>}
+            {usernameExists && <p className="text-red-500 text-sm mt-1">Username already taken</p>}
           </div>
 
           {/* Email Input */}
@@ -117,15 +141,13 @@ const Page = () => {
           {/* Submit Button */}
           <button 
             type="submit" 
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-all">
-            Register
+            className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-all"
+            disabled={usernameExists || loading}>
+            {loading ? 'Registering...' : 'Register'}
           </button>
-         
+
           <Link className='text-blue-600 my-2' href={'/login'}> 
-          
-           Already have an account
-           
-           
+            Already have an account
           </Link>
         </form>
       </div>

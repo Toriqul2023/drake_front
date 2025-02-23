@@ -161,20 +161,24 @@ const Page = () => {
      
       <form onSubmit={handleSubmitProfile(onSubmitProfile)}>
         <h2 className='text-lg font-medium mb-2'>Profile Details</h2>
-        <label htmlFor="">Enter your nickname</label>
+        <label htmlFor="">Type your nickname</label>
         <input className='input-field' {...registerProfile('nickName', { required: true })} placeholder='Nickname' />
-        <label htmlFor="">Enter your nickname</label>
+        <label htmlFor="">Type your Designation</label>
         <input className='input-field' {...registerProfile('designation', { required: true })} placeholder='Designation' />
-        <label htmlFor="">Enter your nickname</label>
+        <label htmlFor="">Type your phone number</label>
         <input className='input-field' {...registerProfile('Phone', { required: true })} placeholder='Enter your phone number(01718******)' />
         
         <label htmlFor="image">Add your Image</label>
         <input id= "image" type='file' className='input-field' {...registerProfile('image', { required: true })} />
-        <label htmlFor="">Enter your nickname</label>
+        <label htmlFor="">Type your address</label>
         <input className='input-field' {...registerProfile('address', { required: true })} placeholder='Enter Address' />
+        <label htmlFor="">Facebook link</label>
         <input className='input-field' {...registerProfile('fbLink')} placeholder='Facebook Link' />
+        <label htmlFor="">Instagram link</label>
         <input className='input-field' {...registerProfile('linkedin')} placeholder='LinkedIn Link' />
+        <label htmlFor="">Instagram link</label>
         <input className='input-field' {...registerProfile('insta')} placeholder='Instagram Link' />
+        <label htmlFor="">Twitter link</label>
         <input className='input-field' {...registerProfile('twitter')} placeholder='Twitter Link' />
         <button type='submit' className='btn-primary'>Submit Profile</button>
       </form>

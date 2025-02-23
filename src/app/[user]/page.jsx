@@ -28,6 +28,7 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify'; // Import toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 import { SocialIcon } from 'react-social-icons'
+import Education from '../Components/Education/Education';
 
 const Page = () => {
   const { user,handleSignOut } = useContext(MyContext);
@@ -228,7 +229,7 @@ const Page = () => {
 <div className="col-span-2 lg:pl-[200px]">
   
   <Introduce userName={userName} />
- 
+  <Education userName={userName} />
   <Experience userName={userName} />
   <Services userName={userName} />
 </div>

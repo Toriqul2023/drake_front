@@ -1,16 +1,21 @@
 'use client'
 import React, { useContext, useState } from 'react';
-import { MyContext } from '../context/context';
+
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify'; // Import toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 import './style.css';
-import Private from '../Private';
+
 import jsPDF from 'jspdf';
 import Link from 'next/link';
+import { MyContext } from '@/app/context/context';
+import Private from '@/app/Private';
+import { useParams } from 'next/navigation';
 
 const Page = () => {
+    const params=useParams()
+    const {id}=params
   const { user } = useContext(MyContext);
   const [profileImage, setProfileImage] = useState();
   const [profileData, setProfileData] = useState(false);
@@ -58,7 +63,7 @@ const Page = () => {
   
   const onSubmitIntro = (data) => {
     axios.post('https://nfc-back-2.onrender.com/intro', {
-      
+      uid:id,
       userName: username,
       heading: data?.heading,
       metaInfo:data?.metaInfo,
@@ -98,6 +103,7 @@ const Page = () => {
     }
 
     await axios.post('https://nfc-back-2.onrender.com/profile', {
+        uid:id,
       userName: username,
       ...data
     }).then(res => {
@@ -115,6 +121,7 @@ const Page = () => {
 
   const onSubmitWork = (data) => {
     axios.post('https://nfc-back-2.onrender.com/work', {
+        uid:id,
       sYear: data?.sYear,
       lYear: isPresent ? 'Present' : data?.lYear,
       designation: data?.designation,
@@ -131,6 +138,7 @@ const Page = () => {
 
   const onSubmitProject = (data) => {
     axios.post('https://nfc-back-2.onrender.com/project', {
+        uid:id,
       userName: username,
       title: data?.title,
       description: data?.description,
@@ -144,7 +152,7 @@ const Page = () => {
 
   const checkCompletion = () => {
     if ((profileData  && introData && workData && projectData) || workData || projectData) {
-      const generatedLink = `https://nfc-rho-one.vercel.app/${username}`;
+      const generatedLink = `https://nfc-rho-one.vercel.app/${id}`;
       setProfileLink(generatedLink);
       setIsModalOpen(true); 
     } else {
@@ -155,7 +163,7 @@ const Page = () => {
   return (
     <Private>
         <div className=' mx-auto p-6  shadow-lg rounded-lg'>
-          <button className='absolute top-[40px]' ><Link href={`${username}`}>Return To main page</Link></button>
+          <button className='absolute top-[40px]' ><Link href={`${id}`}>Return To main page</Link></button>
       <h1 className='text-2xl font-semibold text-center mb-6'>At first time you have to complete every form.After then you can add more work and projects</h1>
        
       {/* Profile Section */}

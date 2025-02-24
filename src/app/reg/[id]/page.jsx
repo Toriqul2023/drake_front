@@ -1,26 +1,22 @@
 'use client'
-import React, { useContext, useEffect, useState, useCallback } from 'react'
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { useForm } from "react-hook-form";
-
 import axios from 'axios';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import debounce from 'lodash.debounce';
 import { MyContext } from '@/app/context/context';
+import debounce from 'lodash.debounce';
 
 const Page = () => {
-    const params = useParams();
-    const {id}=params
- 
-useEffect(()=>{
-    console.log(id)
-},[])
-  const { user, handleReg, updateName } = useContext(MyContext);
+  const params = useParams()
+  const  {id}  = params
+
+  const { handleReg, updateName } = useContext(MyContext);
   const [error, setError] = useState('');
-  const [uidExist, setuidExist] = useState(false);
-  const [loading, setLoading] = useState(false); 
+  const [uidExist, setUidExist] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState('');
   const router = useRouter();
-  const [success, setSuccess] = useState(''); 
 
   const {
     register,
@@ -33,35 +29,36 @@ useEffect(()=>{
   let username = watch("userName");
   username = username ? username.trim().toLowerCase() : '';
 
-  // Function to check username availability
-  const checkUsername = async (name) => {
-    if (name.length < 3) {
-      setuidExist(false);
-      return;
-    }
-    try {
-      const res = await axios.get(`https://nfc-back-2.onrender.com/reginfo?uid=${id}`);
-      console.log(res.data);
-      if (res.data.result && res.data.result.length > 0) {
-        setuidExist(true);
-      } else {
-        setuidExist(false);
+  // Check UID Existence
+  const checkUid = useCallback(
+    debounce(async (uid) => {
+      try {
+        const res = await axios.get(`https://nfc-back-2.onrender.com/reginfo?uid=${id}`);
+        if (res.data.result && res.data.result.length > 0) {
+          setUidExist(true);
+         
+        } else {
+          setUidExist(false);
+        }
+      } catch (err) {
+        console.error("Error checking uid:", err);
+        setError("Failed to check UID. Please try again.");
       }
-    } catch (err) {
-      console.error("Error checking username:", err);
-    }
-  };
-
-  // Debounce the checkUsername function
-  const debouncedCheck = useCallback(
-    debounce((name) => checkUsername(name), 500), []
+    }, 300), [id]
   );
 
-  // Use useEffect to call the debounced check
   useEffect(() => {
-    debouncedCheck(username);
-  }, [username, debouncedCheck]);
-
+    setUidExist(false)
+    if (id) {
+      checkUid(id);
+      
+    }
+  }, [id, checkUid]);
+  useEffect(() => {
+    if (uidExist) {
+      router.push(`/${id}`);
+    }
+  }, [uidExist, id, router]);
   const onSubmit = async (data) => {
     setError('');
     setSuccess('');
@@ -70,18 +67,18 @@ useEffect(()=>{
 
     try {
       if (uidExist) {
-        setError("UId already exists. Try another.");
+        setError("UID already exists. Try another.");
         setLoading(false);
         return;
       }
-      
+
       // Register with Firebase
       await handleReg(data?.email, data?.passwords);
       await updateName(sanitizedUsername);
 
       // Save user info in your database
       await axios.post('https://nfc-back-2.onrender.com/reginfo', {
-        uid:id,
+        uid: id,
         userName: sanitizedUsername,
         emails: data?.email,
         passwords: data?.passwords,
@@ -89,12 +86,28 @@ useEffect(()=>{
 
       setSuccess("Account created successfully! 🎉");
       setTimeout(() => {
-        router.push('/contents');
+        router.push(`/contents/${id}`);
       }, 2000);
 
     } catch (err) {
       console.error("Error:", err);
-      setError("An error occurred. Please try again.");
+      switch (err.code) {
+        case 'auth/email-already-in-use':
+          setError('Email is already in use. Please try another.');
+          break;
+        case 'auth/invalid-email':
+          setError('Invalid email format. Please check and try again.');
+          break;
+        case 'auth/weak-password':
+          setError('Password is too weak. It should be at least 6 characters.');
+          break;
+        case 'auth/network-request-failed':
+          setError('Network error. Please check your connection and try again.');
+          break;
+        default:
+          setError('An unexpected error occurred. Please try again later.');
+          break;
+      }
     } finally {
       setLoading(false);
     }
@@ -106,7 +119,7 @@ useEffect(()=>{
         <h2 className="text-2xl font-bold text-white text-center mb-6">Register</h2>
 
         {success && <p className="text-green-500 text-sm text-center mb-4">{success}</p>}
-        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+        {(error || uidExist) && <p className="text-red-500 text-sm text-center mb-4">{error|| 'Account is already registered'}</p>}
         
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Username Input */}
@@ -119,7 +132,7 @@ useEffect(()=>{
               placeholder="Enter your username"
             />
             {errors.userName && <p className="text-red-500 text-sm mt-1">Username is required</p>}
-            {uidExist && <p className="text-red-500 text-sm mt-1">Username already taken</p>}
+            
           </div>
 
           {/* Email Input */}
@@ -148,11 +161,11 @@ useEffect(()=>{
 
           {/* Submit Button */}
           <button 
-            type="submit" 
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-all"
-            disabled={uidExist || loading}>
-            {loading ? 'Registering...' : 'Register'}
-          </button>
+  type="submit" 
+  className={`w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-all ${ (uidExist || error || loading) ? 'opacity-50 cursor-not-allowed' : '' }`}
+  disabled={uidExist || error || loading}>
+  {loading ? 'Registering...' : 'Register'}
+</button>
 
           <Link className='text-blue-600 my-2' href={'/login'}> 
             Already have an account

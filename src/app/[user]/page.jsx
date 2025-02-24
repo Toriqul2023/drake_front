@@ -34,13 +34,13 @@ const Page = () => {
   const { user,handleSignOut } = useContext(MyContext);
   const [profileForm, setProfileForm] = useState(false);
   const params = useParams();
-  const userName = params?.user;
+  const uid = params?.user;
   const [profile, setProfile] = useState([]);
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
     axios
-      .get(`https://nfc-back-2.onrender.com/profile?username=${userName}`)
+      .get(`https://nfc-back-2.onrender.com/profile?uid=${uid}`)
       .then((res) => {
         setProfile(res.data?.result);
       });
@@ -102,7 +102,7 @@ const Page = () => {
     if(data?.twitter)  updateField.twitter=data.twitter
 
 
-    await axios.put(`https://nfc-back-2.onrender.com/profile?username=${user?.displayName}`,updateField)
+    await axios.put(`https://nfc-back-2.onrender.com/profile?uid=${uid}`,updateField)
     .then((res)=>setProfile(res.data?.result))
     
     setProfileForm(false);

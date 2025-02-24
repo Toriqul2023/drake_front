@@ -16,7 +16,7 @@ const Experience = ({ uid }) => {
   useEffect(() => {
     axios.get(`https://nfc-back-2.onrender.com/work?uid=${uid}`)
       .then(res => setWorks(res.data?.result))
-  }, [userName]) 
+  }, [uid]) 
 
   const toggleUpdateForm = (id, workData) => {
     setUpdatedForm(prev => ({

@@ -52,7 +52,7 @@ const Page = () => {
       const response = await axios.post(
         "https://nfc-back-2.onrender.com/vcard",
         {
-          name: profile[0]?.nickName || userName,
+          name: profile[0]?.nickName || "N/A",
           phone: profile[0]?.phone || "N/A",
           email: profile[0]?.email || "N/A",
           address: profile[0]?.address || "N/A",

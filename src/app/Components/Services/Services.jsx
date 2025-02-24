@@ -6,13 +6,13 @@ import { useForm } from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify'; // Import toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 
-const Services = ({userName}) => {
+const Services = ({uid}) => {
   const {user}=useContext(MyContext)
   const [services,setServices]=useState([]);
   const [updatedForm, setUpdatedForm] = useState({})
   const { register, handleSubmit, reset } = useForm()
  useEffect(()=>{
-  axios.get(`https://nfc-back-2.onrender.com/project?username=${userName}`)
+  axios.get(`https://nfc-back-2.onrender.com/project?uid=${uid}`)
   .then((res)=>{
     setServices(res.data?.result);
   })

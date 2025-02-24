@@ -65,7 +65,7 @@ const Page = () => {
 
       link.href = URL.createObjectURL(blob);
       
-      link.download = `${userName.replace(/\s+/g, "_")}.vcf`;
+      link.download = `${profile[0]?.nickName}.vcf`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -90,7 +90,7 @@ const Page = () => {
       );
       const imageUrl = imgBBresponse.data?.data?.url;
       const updateField={};
-    updateField.userName=user?.displayName
+    updateField.uid=uid
     if(data?.nickName) updateField.nickName=data.nickName
     if(data?.designation) updateField.designation=data.designation
     if(data?.phone) updateField.phone=data.phone
@@ -150,7 +150,7 @@ const Page = () => {
 <div className="pt-[50px]">
   <div className="lg:fixed border lg:w-[400px]  rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
     <div className="flex justify-between items-center py-5">
-      <h1 className="text-4xl">{userName}</h1>
+      <h1 className="text-4xl">{profile[0]?.nickName}</h1>
       <p>{profile[0]?.designation}</p>
     </div>
 
@@ -228,10 +228,10 @@ const Page = () => {
 
 <div className="col-span-2 lg:pl-[200px]">
   
-  <Introduce userName={userName} />
-  <Education userName={userName} />
-  <Experience userName={userName} />
-  <Services userName={userName} />
+  <Introduce uid={uid}/>
+  <Education  uid={uid} />
+  <Experience uid={uid}/>
+  <Services  uid={uid}/>
 </div>
 
 

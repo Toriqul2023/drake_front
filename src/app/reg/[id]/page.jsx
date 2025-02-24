@@ -2,14 +2,14 @@
 import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { MyContext } from '@/app/context/context';
 import debounce from 'lodash.debounce';
 
 const Page = () => {
-  const params = useParams()
-  const  {id}  = params
+  const params = useParams();
+  const { id } = params;
 
   const { handleReg, updateName } = useContext(MyContext);
   const [error, setError] = useState('');
@@ -22,7 +22,8 @@ const Page = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors },
+    setError: setFormError
   } = useForm();
 
   // Get the username as the user types
@@ -36,9 +37,10 @@ const Page = () => {
         const res = await axios.get(`https://nfc-back-2.onrender.com/reginfo?uid=${id}`);
         if (res.data.result && res.data.result.length > 0) {
           setUidExist(true);
-         
+          setError("UID already exists. Try another.");
         } else {
           setUidExist(false);
+          setError(''); // Clear error if UID is valid
         }
       } catch (err) {
         console.error("Error checking uid:", err);
@@ -48,17 +50,17 @@ const Page = () => {
   );
 
   useEffect(() => {
-    setUidExist(false)
     if (id) {
       checkUid(id);
-      
     }
   }, [id, checkUid]);
+
   useEffect(() => {
     if (uidExist) {
       router.push(`/${id}`);
     }
   }, [uidExist, id, router]);
+
   const onSubmit = async (data) => {
     setError('');
     setSuccess('');
@@ -93,13 +95,13 @@ const Page = () => {
       console.error("Error:", err);
       switch (err.code) {
         case 'auth/email-already-in-use':
-          setError('Email is already in use. Please try another.');
+          setFormError('email', { type: 'manual', message: 'Email is already in use. Please try another.' });
           break;
         case 'auth/invalid-email':
-          setError('Invalid email format. Please check and try again.');
+          setFormError('email', { type: 'manual', message: 'Invalid email format. Please check and try again.' });
           break;
         case 'auth/weak-password':
-          setError('Password is too weak. It should be at least 6 characters.');
+          setFormError('passwords', { type: 'manual', message: 'Password is too weak. It should be at least 6 characters.' });
           break;
         case 'auth/network-request-failed':
           setError('Network error. Please check your connection and try again.');
@@ -113,13 +115,22 @@ const Page = () => {
     }
   };
 
+  const handleInputChange = () => {
+    // Clear email error when user starts typing a new email
+    if (errors.email) setFormError('email', { type: 'manual', message: '' });
+    // Similarly, clear username and password errors if needed
+    if (errors.passwords) setFormError('passwords', { type: 'manual', message: '' });
+    if (errors.userName) setFormError('userName', { type: 'manual', message: '' });
+    setError(''); // Clear general error
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-900">
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold text-white text-center mb-6">Register</h2>
 
         {success && <p className="text-green-500 text-sm text-center mb-4">{success}</p>}
-        {(error || uidExist) && <p className="text-red-500 text-sm text-center mb-4">{error|| 'Account is already registered'}</p>}
+        {(error || uidExist) && <p className="text-red-500 text-sm text-center mb-4">{error || 'Account is already registered'}</p>}
         
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Username Input */}
@@ -130,9 +141,9 @@ const Page = () => {
               {...register("userName", { required: true })}
               className="w-full p-2 mt-1 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your username"
+              onChange={handleInputChange}  // Clear error on change
             />
-            {errors.userName && <p className="text-red-500 text-sm mt-1">Username is required</p>}
-            
+            {errors.userName && <p className="text-red-500 text-sm mt-1">{errors.userName.message || "Username is required"}</p>}
           </div>
 
           {/* Email Input */}
@@ -143,8 +154,9 @@ const Page = () => {
               {...register("email", { required: true })}
               className="w-full p-2 mt-1 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your email"
+              onChange={handleInputChange}  // Clear error on change
             />
-            {errors.email && <p className="text-red-500 text-sm mt-1">Email is required</p>}
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message || "Email is required"}</p>}
           </div>
 
           {/* Password Input */}
@@ -155,17 +167,18 @@ const Page = () => {
               {...register("passwords", { required: true })}
               className="w-full p-2 mt-1 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your password"
+              onChange={handleInputChange}  // Clear error on change
             />
-            {errors.passwords && <p className="text-red-500 text-sm mt-1">Password is required</p>}
+            {errors.passwords && <p className="text-red-500 text-sm mt-1">{errors.passwords.message || "Password is required"}</p>}
           </div>
 
           {/* Submit Button */}
           <button 
-  type="submit" 
-  className={`w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-all ${ (uidExist || error || loading) ? 'opacity-50 cursor-not-allowed' : '' }`}
-  disabled={uidExist || error || loading}>
-  {loading ? 'Registering...' : 'Register'}
-</button>
+            type="submit" 
+            className={`w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-md transition-all ${ (uidExist || error || loading) ? 'opacity-50 cursor-not-allowed' : '' }`}
+            disabled={uidExist || error || loading}>
+            {loading ? 'Registering...' : 'Register'}
+          </button>
 
           <Link className='text-blue-600 my-2' href={'/login'}> 
             Already have an account

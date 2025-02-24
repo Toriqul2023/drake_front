@@ -11,13 +11,13 @@ import axios from 'axios';
 import { MyContext } from '@/app/context/context';
 import { useForm } from 'react-hook-form';
 
-const Introduce = ({userName}) => {
+const Introduce = ({uid}) => {
   const {user}=useContext(MyContext)
   const [intros,setIntros]=useState([])
   const [form,setForm]=useState(false);
   const {register,handleSubmit}=useForm()
   useEffect(()=>{
-    axios.get(`https://nfc-back-2.onrender.com/intro?username=${userName}`)
+    axios.get(`https://nfc-back-2.onrender.com/intro?uid=${uid}`)
     .then(res=>setIntros(res.data.result))
     
   })
@@ -27,7 +27,7 @@ const Introduce = ({userName}) => {
     if(data.metaInfo) updateField.netaInfo=data.metaInfo
     if(data.experience) updateField.experience=data.experience
     if(data.projects)  updateField.projects=data.projects
-   const response=await axios.patch(`https://nfc-back-2.onrender.com/intro?username=${user?.displayName}`,updateField)
+   const response=await axios.patch(`https://nfc-back-2.onrender.com/intro?uid=${uid}`,updateField)
    setIntros(response.data?.result)
     
   }

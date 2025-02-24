@@ -64,7 +64,7 @@ const Page = () => {
   const onSubmitIntro = (data) => {
     axios.post('https://nfc-back-2.onrender.com/intro', {
       uid:id,
-      userName: username,
+     
       heading: data?.heading,
       metaInfo:data?.metaInfo,
       experience: data?.experience,
@@ -104,7 +104,7 @@ const Page = () => {
 
     await axios.post('https://nfc-back-2.onrender.com/profile', {
         uid:id,
-      userName: username,
+     
       ...data
     }).then(res => {
       console.log(res.data.count)
@@ -126,7 +126,7 @@ const Page = () => {
       lYear: isPresent ? 'Present' : data?.lYear,
       designation: data?.designation,
       company: data?.company,
-      userName: username,
+      
     }).then(res => {
       toast.success('Work experience submitted successfully!'); // Show success toast
       setWorkData(true);
@@ -139,7 +139,7 @@ const Page = () => {
   const onSubmitProject = (data) => {
     axios.post('https://nfc-back-2.onrender.com/project', {
         uid:id,
-      userName: username,
+      
       title: data?.title,
       description: data?.description,
       link: data?.link

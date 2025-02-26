@@ -3,16 +3,16 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const Education = ({userName}) => {
+const Education = ({uid}) => {
     const { user } = useContext(MyContext)
     const [educations, seteducations] = useState([])
     const [updatedForm, setUpdatedForm] = useState({})
     const { register, handleSubmit, reset } = useForm()
   
     useEffect(() => {
-      axios.get(`https://nfc-back-2.onrender.com/education?username=sakib`)
+      axios.get(`https://nfc-back-2.onrender.com/education?uid=${uid}`)
         .then(res => seteducations(res.data?.result))
-    }, [userName]) 
+    }, [uid]) 
   
     const toggleUpdateForm = (id, educationData) => {
       setUpdatedForm(prev => ({
@@ -53,10 +53,10 @@ const Education = ({userName}) => {
         <div className='pl-[80px] pb-5 border-l border-[#565656] relative'>
           {educations.map(education => (
             <div key={education._id} className='framers w-[100%] mb-[50px] relative'>
-              <p id='p1' className='text-gray-400'>{education?.ininstitution} - {education?.degree || 'present'}</p>
+              <p id='p1' className='text-gray-400'>{education?.startDate} - {education?.endDate || 'present'}</p>
              <div className='my-[30px]'>
-                <h3 className='text-2xl font-light'>{education?.startDate}</h3>
-                <span className='text-gray-400 text-[12px]'>{education?.endDate}</span>
+                <h3 className='text-2xl font-light'>{education?.institution}</h3>
+                <span className='text-gray-400 text-[12px]'>{education?.degree}</span>
             <div>
                   
                 
@@ -70,36 +70,82 @@ const Education = ({userName}) => {
                     </button>
   
                     {updatedForm[education._id] && (
-                      <form onSubmit={handleSubmit(data => onSubmitUpdate(data, education._id))} className="mt-4">
-                        <h1 className='text-lg'>Update Your Experience</h1>
+                      // <form onSubmit={handleSubmit(data => onSubmitUpdate(data, education._id))} className="mt-4">
+                      //   <h1 className='text-lg'>Update Your Experience</h1>
+                      //   <input 
+                      //     className='text-black p-2 mr-4' 
+                      //     {...register("ininstitution")} 
+                      //     defaultValue={education.ininstitution} 
+                      //     placeholder="Starting date of education" 
+                      //   />
+                      //   <input 
+                      //     className='text-black p-2 m-4' 
+                      //     {...register("degree")} 
+                      //     defaultValue={education.degree} 
+                      //     placeholder="Enter last date of Job" 
+                      //   />
+                      //   <input 
+                      //     className='text-black p-2 m-4' 
+                      //     {...register("startDate")} 
+                      //     defaultValue={education.startDate} 
+                      //     placeholder="Enter Your startDate" 
+                      //   />
+                      //   <input 
+                      //     className='text-black p-2 m-4' 
+                      //     {...register("endDate")} 
+                      //     defaultValue={education.endDate} 
+                      //     placeholder="Enter endDate Name" 
+                      //   />
+                      //   <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded mt-2">
+                      //     Submit Update
+                      //   </button>
+                      // </form>
+                      <form 
+                      onSubmit={handleSubmit(data => onSubmitUpdate(data, education._id))} 
+                      className="mt-4 bg-white p-6 rounded-lg shadow-lg"
+                    >
+                      <div className="mb-4">
+                        <label className="block text-black">Starting year</label>
                         <input 
-                          className='text-black p-2 mr-4' 
-                          {...register("ininstitution")} 
-                          defaultValue={education.ininstitution} 
-                          placeholder="Starting date of education" 
+                          className='w-full border rounded-lg p-2 mt-1 text-black' 
+                          {...register("startDate")}
+                          placeholder="Enter your project Title" 
                         />
-                        <input 
-                          className='text-black p-2 m-4' 
-                          {...register("degree")} 
-                          defaultValue={education.degree} 
-                          placeholder="Enter last date of Job" 
-                        />
-                        <input 
-                          className='text-black p-2 m-4' 
-                          {...register("startDate")} 
-                          defaultValue={education.startDate} 
-                          placeholder="Enter Your startDate" 
-                        />
-                        <input 
-                          className='text-black p-2 m-4' 
+                      </div>
+                      <div className="mb-4">
+                        <label className="block text-gray-700">Passing year</label>
+                        <input
+                        
+                          className='w-full border rounded-lg p-2 mt-1' 
                           {...register("endDate")} 
-                          defaultValue={education.endDate} 
-                          placeholder="Enter endDate Name" 
+                          placeholder="Enter passing year" 
                         />
-                        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded mt-2">
-                          Submit Update
-                        </button>
-                      </form>
+                      </div>
+                      <div className="mb-4">
+                        <label className="block ">Inistitution name</label>
+                        <input 
+                          className='w-full border rounded-lg p-2 mt-1 etxt-black' 
+                          {...register("inistitution")} 
+                          placeholder="Enter your inistituition" 
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label className="block text-gray-700">Degree name</label>
+                        <input 
+                          className='w-full border rounded-lg p-2 mt-1' 
+                          {...register("degree")} 
+                          placeholder="Enter your degree" 
+                        />
+                      </div>
+                     
+                      <button 
+                        type="submit" 
+                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+                      >
+                        Submit Update
+                      </button>
+                    </form>
+
                     )}
                   </>
                 )}

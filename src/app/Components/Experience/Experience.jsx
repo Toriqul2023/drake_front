@@ -14,7 +14,7 @@ const Experience = ({ uid }) => {
   const [showNewExperienceForm, setShowNewExperienceForm] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const { register, handleSubmit, reset } = useForm()
+  const { register, handleSubmit, reset,watch } = useForm()
 
   // Fetch existing experiences
   useEffect(() => {
@@ -45,6 +45,7 @@ const Experience = ({ uid }) => {
         lYear: workData?.lYear || '',
         designation: workData?.designation || '',
         company: workData?.company || '',
+        stillWorking: !workData?.lYear,
       });
     }
   };
@@ -56,11 +57,13 @@ const Experience = ({ uid }) => {
     if (data?.lYear?.trim()) updateField.lYear = data.lYear
     if (data?.designation?.trim()) updateField.designation = data.designation
     if (data?.company?.trim()) updateField.company = data.company
+    updateField.lYear = data.stillWorking ? '' : data.lYear
     
     axios.patch(`https://nfc-back-2.onrender.com/work/${id}`, updateField)
       .then(() => {
         setWorks(prev => prev.map(work => work._id === id ? { ...work, ...updateField } : work));
         setUpdatedForm(prev => ({ ...prev, [id]: false }));
+        reset()
         toast.success("Experience updated successfully");
       })
       .catch(err => {
@@ -71,7 +74,7 @@ const Experience = ({ uid }) => {
 
   
 
-
+  const stillWorking = watch("stillWorking");
   
 
   return (
@@ -84,7 +87,7 @@ const Experience = ({ uid }) => {
       ) : (
         works.length > 0 && (
           <div className='py-[50px]' id="Resume">
-            <button className="border border-[#565656] text-[14px] rounded-3xl mb-[20px] py-2 px-5">RESUME</button>
+            <button className="border border-[#565656] text-[14px] rounded-3xl mb-[20px] py-2 px-5">WORK</button>
             <h1 className='lg:text-6xl my-5 mb-[50px] font-light'>Work <span className='text-[#28E98C]'>Experience</span></h1>
             
           
@@ -105,18 +108,63 @@ const Experience = ({ uid }) => {
                             {updatedForm[work?._id] ? "Hide Update Form" : "Edit your job experience"}
                           </button>
                           {updatedForm[work?._id] && (
-                            <form onSubmit={handleSubmit(data => onSubmitUpdate(data, work._id))} className="mt-4">
-                              <h1 className='text-lg'>Update Your Experience</h1>
-                              <input 
-                                className='text-black p-2 mr-4' 
-                                {...register("sYear")} 
-                                defaultValue={work.sYear} 
-                                placeholder="Starting date of work" 
-                              />
-                              <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded mt-2">
-                                Submit Update
-                              </button>
-                            </form>
+                                        <form 
+                                        onSubmit={handleSubmit(data => onSubmitUpdate(data, work._id))} 
+                                        className="mt-4 bg-white p-6 rounded-lg shadow-lg"
+                                      >
+                                        <div className="mb-4">
+                                          <label className="block text-gray-700">Starting Year</label>
+                                          <input 
+                                            className='w-full border rounded-lg p-2 mt-1' 
+                                            {...register("sYear")} 
+                                            placeholder="Starting date of work" 
+                                          />
+                                        </div>
+                                        <div className="flex items-center space-x-2">
+                                <input 
+                                  type="checkbox" 
+                                  {...register("stillWorking")} 
+                                />
+                                 <label 
+                                        htmlFor={`stillWorking-${work._id}`} 
+                                        className="text-gray-700 select-none cursor-pointer"
+                                 >
+                                        Still working here?
+                                </label>
+
+
+                              </div>
+
+                              {!stillWorking && (
+                                <input 
+                                  className='text-black p-2 w-full border rounded' 
+                                  {...register("lYear")} 
+                                  placeholder="Last date of work" 
+                                />
+                              )}
+                                        <div className="mb-4">
+                                          <label className="block text-gray-700">Designation</label>
+                                          <input 
+                                            className='w-full border rounded-lg p-2 mt-1' 
+                                            {...register("designation")} 
+                                            placeholder="Enter your designation" 
+                                          />
+                                        </div>
+                                        <div className="mb-4">
+                                          <label className="block text-gray-700">Company</label>
+                                          <input 
+                                            className='w-full border rounded-lg p-2 mt-1' 
+                                            {...register("company")} 
+                                            placeholder="Enter your Company" 
+                                          />
+                                        </div>
+                                        <button 
+                                          type="submit" 
+                                          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+                                        >
+                                          Submit Update
+                                        </button>
+                                      </form>
                           )}
                         </>
                       )}

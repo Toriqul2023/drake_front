@@ -166,7 +166,7 @@ const Page = () => {
         {profile[0]?.address}
       </p>
 
-      <ul className="grid grid-cols-4 w-[100%]  justify-center my-[20px] gap-3">
+      <ul className="grid grid-cols-4 w-[100%]  place-content-center my-[20px] gap-3">
         {profile[0]?.fbLink && (
           <li className=" flex items-center justify-center">
             <a href={`${profile[0]?.fbLink}`}>
@@ -260,8 +260,8 @@ const Page = () => {
       />
       <label className="block mb-2">Type your phone number</label>
       <input
-        {...register("designation")}
-        defaultValue={profile[0]?.designation}
+        {...register("phone")}
+        defaultValue={profile[0]?.phone}
         className="w-full border p-2 rounded mb-3"
       />
       <label className="block mb-2">Upload Your image</label>

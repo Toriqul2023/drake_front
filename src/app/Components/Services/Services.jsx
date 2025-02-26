@@ -77,35 +77,43 @@ const onSubmitUpdate = (data, id) => {
                       </button>
     
                       {updatedForm[service._id] && (
-                        <form onSubmit={handleSubmit(data => onSubmitUpdate(data, service._id))} className="mt-4">
-                          <h1 className='text-lg'>Update Your Project</h1>
+                       
+                        <form 
+                        onSubmit={handleSubmit(data => onSubmitUpdate(data, service._id))} 
+                        className="mt-4 bg-white p-6 rounded-lg shadow-lg"
+                      >
+                        <div className="mb-4">
+                          <label className="block text-gray-700">Project Title</label>
                           <input 
-                            className='text-black p-2 mr-4' 
-                            {...register("title")} 
-                            placeholder='Enter your project title'
-                          
-                             
+                            className='w-full border rounded-lg p-2 mt-1' 
+                            {...register("title")}
+                            placeholder="Enter your project Title" 
                           />
-                          <div>
-                          <textarea
-                            className='text-black p-2 m-4 ml-0 h-32 w-[100%]' 
+                        </div>
+                        <div className="mb-4">
+                          <label className="block text-gray-700">Project Description</label>
+                          <textarea 
+                            className='w-full border rounded-lg p-2 mt-1 h-30' 
                             {...register("description")} 
-                           placeholder='Enter a short decription of project'
-                            
+                            placeholder="Enter your project description" 
                           />
-                          </div>
-                         
+                        </div>
+                        <div className="mb-4">
+                          <label className="block text-gray-700">Project Link</label>
                           <input 
-                            className='text-black p-2 m-4 ml-0' 
+                            className='w-full border rounded-lg p-2 mt-1' 
                             {...register("link")} 
-                            
-                            placeholder="Enter Your project link" 
+                            placeholder="Enter your project link" 
                           />
-                        
-                          <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded mt-2">
-                            Submit
-                          </button>
-                        </form>
+                        </div>
+                       
+                        <button 
+                          type="submit" 
+                          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+                        >
+                          Submit Update
+                        </button>
+                      </form>
                       )}
                     </>
                   )}

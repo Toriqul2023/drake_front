@@ -175,7 +175,7 @@ const Page = () => {
         <label htmlFor="">Type your Designation</label>
         <input className='input-field' {...registerProfile('designation', { required: true })} placeholder='Designation' />
         <label htmlFor="">Type your phone number</label>
-        <input className='input-field' {...registerProfile('Phone', { required: true })} placeholder='Enter your phone number(01718******)' />
+        <input className='input-field' {...registerProfile('phone', { required: true })} placeholder='Enter your phone number(01718******)' />
         
         <label htmlFor="image">Add your Image</label>
         <input id= "image" type='file' className='input-field' {...registerProfile('image', { required: true })} />

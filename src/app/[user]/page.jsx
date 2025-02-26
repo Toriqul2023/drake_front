@@ -123,15 +123,13 @@ const Page = () => {
     <>
     {
       user?.email && (
-        <div className="fixed top-0 left-0 w-full bg-gray-800 text-white px-4 py-3 shadow-md flex justify-between items-center z-50">
+        <div className="fixed top-0 left-0 w-full bg-gray-800 text-white px-4 py-3 shadow-md flex justify-center items-center z-50">
            <Link href={'/contents'} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mr-2 transition duration-300">
           add contents
         </Link>
-        <h1 className='text-center justify-self-center'>This is only visible when you are logged in</h1>
+     
        
-        <button onClick={logOut} className="bg-red-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition duration-300">
-          log out
-        </button>
+      
       </div>
       )
     }

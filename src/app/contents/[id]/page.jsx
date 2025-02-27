@@ -236,7 +236,7 @@ const Page = () => {
       
         <h3 className='text-lg font-medium mb-2'>Education Experience</h3>
         <label className='text-white my-4'>You can add multiple eduaction's experience </label>
-        <input className='input-field' {...registerWork('startDate', { required: true })} placeholder='Starting Year' />
+        <input className='input-field' {...registerEducation('startDate', { required: true })} placeholder='Starting Year' />
         <input 
         className="input-field" 
         {...registerEducation('endDate', { required: !isPresent })} 

@@ -105,9 +105,9 @@ const Education = ({uid}) => {
                       className="mt-4 bg-white p-6 rounded-lg shadow-lg"
                     >
                       <div className="mb-4">
-                        <label className="block text-black">Starting year</label>
+                        <label className="block text-gray-700">Starting year</label>
                         <input 
-                          className='w-full border rounded-lg p-2 mt-1 text-black' 
+                          className='w-full border rounded-lg p-2 mt-1 text-gray-700' 
                           {...register("startDate")}
                           placeholder="Enter your project Title" 
                         />
@@ -116,7 +116,7 @@ const Education = ({uid}) => {
                         <label className="block text-gray-700">Passing year</label>
                         <input
                         
-                          className='w-full border rounded-lg p-2 mt-1' 
+                          className='w-full border rounded-lg p-2 mt-1 text-gray-700' 
                           {...register("endDate")} 
                           placeholder="Enter passing year" 
                         />
@@ -124,7 +124,7 @@ const Education = ({uid}) => {
                       <div className="mb-4">
                         <label className="block ">Inistitution name</label>
                         <input 
-                          className='w-full border rounded-lg p-2 mt-1 etxt-black' 
+                          className='w-full border rounded-lg p-2 mt-1 text-gray-700' 
                           {...register("inistitution")} 
                           placeholder="Enter your inistituition" 
                         />
@@ -132,7 +132,7 @@ const Education = ({uid}) => {
                       <div className="mb-4">
                         <label className="block text-gray-700">Degree name</label>
                         <input 
-                          className='w-full border rounded-lg p-2 mt-1' 
+                          className='w-full border rounded-lg p-2 mt-1 text-gray-700' 
                           {...register("degree")} 
                           placeholder="Enter your degree" 
                         />

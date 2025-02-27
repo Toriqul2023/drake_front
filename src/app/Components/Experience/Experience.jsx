@@ -115,7 +115,7 @@ const Experience = ({ uid }) => {
                                         <div className="mb-4">
                                           <label className="block text-gray-700">Starting Year</label>
                                           <input 
-                                            className='w-full border rounded-lg p-2 mt-1' 
+                                            className='w-full border rounded-lg p-2 mt-1 text-gray-700' 
                                             {...register("sYear")} 
                                             placeholder="Starting date of work" 
                                           />
@@ -137,7 +137,7 @@ const Experience = ({ uid }) => {
 
                               {!stillWorking && (
                                 <input 
-                                  className='text-black p-2 w-full border rounded' 
+                                  className='text-black p-2 w-full border rounded text-gray-700' 
                                   {...register("lYear")} 
                                   placeholder="Last date of work" 
                                 />
@@ -145,7 +145,7 @@ const Experience = ({ uid }) => {
                                         <div className="mb-4">
                                           <label className="block text-gray-700">Designation</label>
                                           <input 
-                                            className='w-full border rounded-lg p-2 mt-1' 
+                                            className='w-full border rounded-lg p-2 mt-1 text-gray-700' 
                                             {...register("designation")} 
                                             placeholder="Enter your designation" 
                                           />
@@ -153,7 +153,7 @@ const Experience = ({ uid }) => {
                                         <div className="mb-4">
                                           <label className="block text-gray-700">Company</label>
                                           <input 
-                                            className='w-full border rounded-lg p-2 mt-1' 
+                                            className='w-full border rounded-lg p-2 mt-1 text-gray-700' 
                                             {...register("company")} 
                                             placeholder="Enter your Company" 
                                           />

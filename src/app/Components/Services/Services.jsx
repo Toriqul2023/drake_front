@@ -61,7 +61,7 @@ const onSubmitUpdate = (data, id) => {
         <h1 className='lg:text-6xl my-3 mb-[50px] font-light'>My <span className='text-[#28E98C]'> projects</span> </h1>
         <div>
           {
-                 services.map(service=>( <div key={service?._id}  className='border border-[#565656] rounded-3xl my-4 px-[30px] pt-[40px] pb-[30px]   hover:border-[#28E98C]'>
+                 services.map(service=>( <div key={service?._id}  className='border border-[#565656] rounded-3xl my-4 px-[30px] pt-[40px] pb-[20px]   hover:border-[#28E98C]'>
                   <h3 className='text-3xl font-light mb-5'>{service?.title}</h3>
                   <p className='text-gray-400 mb-[50px] text-start'>{service.description}</p>
                   <div>
@@ -85,7 +85,7 @@ const onSubmitUpdate = (data, id) => {
                         <div className="mb-4">
                           <label className="block text-gray-700">Project Title</label>
                           <input 
-                            className='w-full border rounded-lg p-2 mt-1' 
+                            className='w-full border rounded-lg p-2 mt-1 text-gray-700' 
                             {...register("title")}
                             placeholder="Enter your project Title" 
                           />
@@ -93,7 +93,7 @@ const onSubmitUpdate = (data, id) => {
                         <div className="mb-4">
                           <label className="block text-gray-700">Project Description</label>
                           <textarea 
-                            className='w-full border rounded-lg p-2 mt-1 h-30' 
+                            className='w-full border rounded-lg p-2 mt-1 h-30 text-gray-700' 
                             {...register("description")} 
                             placeholder="Enter your project description" 
                           />
@@ -101,7 +101,7 @@ const onSubmitUpdate = (data, id) => {
                         <div className="mb-4">
                           <label className="block text-gray-700">Project Link</label>
                           <input 
-                            className='w-full border rounded-lg p-2 mt-1' 
+                            className='w-full border rounded-lg p-2 mt-1 text-gray-700' 
                             {...register("link")} 
                             placeholder="Enter your project link" 
                           />

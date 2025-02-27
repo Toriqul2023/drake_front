@@ -22,6 +22,7 @@ const Page = () => {
   
   const [introData, setIntroData] = useState(false);
   const [workData, setWorkData] = useState(false);
+  const [educationData,setEducationData]=useState(false);
   const [completedSections, setCompletedSections] = useState([]);
   const [projectData, setProjectData] = useState(null);
   const [profileLink, setProfileLink] = useState("");
@@ -45,6 +46,12 @@ const Page = () => {
     register: registerProject,
     handleSubmit: handleSubmitProject,
     formState: { errors: errorsProject }
+  } = useForm(formOptions);
+  const {
+    register: registerEducation,
+    handleSubmit: handleSubmitEducation,
+    formState: { errors: errorsEducation },
+    reset:resetEducation,
   } = useForm(formOptions);
 
   const {
@@ -134,6 +141,21 @@ const Page = () => {
       
     });
   };
+  const onSubmitEducation = (data) => {
+    axios.post('https://nfc-back-2.onrender.com/education', {
+      uid:id,
+      startDate: data?.startDate,
+      endDate: isPresent ? 'Present' : data?.endDate,
+      inistitution: data?.inistitution,
+      degree: data?.degree,
+      
+    }).then(res => {
+      toast.success('Education experience submitted successfully!'); // Show success toast
+      setEducationData(true);
+      resetEducation()
+      
+    });
+  };
   
 
   const onSubmitProject = (data) => {
@@ -151,7 +173,7 @@ const Page = () => {
   };
 
   const checkCompletion = () => {
-    if ((profileData  && introData && workData && projectData) || workData || projectData) {
+    if ((profileData  && introData && workData && projectData) || workData || projectData || educationData) {
       const generatedLink = `https://nfc-rho-one.vercel.app/${id}`;
       setProfileLink(generatedLink);
       setIsModalOpen(true); 
@@ -208,8 +230,33 @@ const Page = () => {
           
         </div>
       </form>
-
-    
+{/* edcation*/}
+      <form onSubmit={handleSubmitEducation(onSubmitEducation)} className='mb-6'>
+      
+        <h3 className='text-lg font-medium mb-2'>Education Experience</h3>
+        <label className='text-white my-4'>You can add multiple eduaction's experience </label>
+        <input className='input-field' {...registerWork('startDate', { required: true })} placeholder='Starting Year' />
+        <input 
+        className="input-field" 
+        {...registerEducation('endDate', { required: !isPresent })} 
+        placeholder="Passing year" 
+        disabled={isPresent}
+      />
+           <div className="flex items-center gap-2 my-4">
+     
+        <label htmlFor="present" className="text-white mt-[-3px]">If you currently in study select the box</label>
+        <input 
+          type="checkbox" 
+          id="present" 
+          checked={isPresent} 
+          onChange={() => setIsPresent(!isPresent)} 
+           className="h-5 w-5 text-blue-500"
+        />
+      </div>
+        <input className='input-field' {...registerEducation('inistitution',)} placeholder='Enter your inistitution name' />
+        <input className='input-field' {...registerEducation('degree',)} placeholder='Enter your degree' />
+        <button type='submit' className='btn-primary'>Add Education</button>
+      </form>
 
       {/* Work Section */}
       <form onSubmit={handleSubmitWork(onSubmitWork)} className='mb-6'>

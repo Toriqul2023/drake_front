@@ -303,7 +303,7 @@ const Page = () => {
       {/* Toast container */}
       <div className='flex justify-center'>
       <button onClick={checkCompletion} className={`btn-primary lg:w-[500px] mb-5 text-center ${
-    (profileData  && introData) || workData|| projectData
+    (profileData  && introData) || workData|| projectData || educationData
       ? ''
       : 'opacity-50 cursor-not-allowed'
   }`}>Complete</button>

@@ -142,11 +142,12 @@ const Page = () => {
     });
   };
   const onSubmitEducation = (data) => {
+    console.log(data)
     axios.post('https://nfc-back-2.onrender.com/education', {
       uid:id,
       startDate: data?.startDate,
       endDate: isPresent ? 'Present' : data?.endDate,
-      inistitution: data?.inistitution,
+      institution: data?.institution,
       degree: data?.degree,
       
     }).then(res => {
@@ -253,7 +254,7 @@ const Page = () => {
            className="h-5 w-5 text-blue-500"
         />
       </div>
-        <input className='input-field' {...registerEducation('inistitution',)} placeholder='Enter your inistitution name' />
+        <input className='input-field' {...registerEducation('institution',)} placeholder='Enter your institution name' />
         <input className='input-field' {...registerEducation('degree',)} placeholder='Enter your degree' />
         <button type='submit' className='btn-primary'>Add Education</button>
       </form>

@@ -142,22 +142,29 @@ const Page = () => {
     }
   };
 
-  const onSubmitWork = (data) => {
-    axios.post('https://nfc-back-2.onrender.com/work', {
-        uid:id,
-      sYear: data?.sYear,
-      lYear: isPresent ? 'Present' : data?.lYear,
-      designation: data?.designation,
-      company: data?.company,
+  const onSubmitWork = async (data) => {
+    setIsLoading(true); // Set loading state to true
+    try {
       
-    }).then(res => {
+      await axios.post('https://nfc-back-2.onrender.com/work', {
+        uid: id,
+        sYear: data?.sYear,
+        lYear: isPresent ? 'Present' : data?.lYear,
+        designation: data?.designation,
+        company: data?.company,
+      });
+  
       toast.success('Work experience submitted successfully!');
-      setProfileData(true); // Show success toast
+      setProfileData(true);
       setWorkData(false);
-      resetWork()
-      
-    });
+      resetWork();
+    } catch (error) {
+      toast.error('Something went wrong, please try again.');
+    } finally {
+      setIsLoading(false); // Set loading state to false after the request is done
+    }
   };
+  
   const onSubmitEducation = (data) => {
     setIsLoading(true)
     console.log(data)
@@ -318,7 +325,7 @@ const Page = () => {
  </div>
    <input className='input-field' {...registerWork('designation',)} placeholder='Designation' />
    <input className='input-field' {...registerWork('company',)} placeholder='Company Name' />
-   <button type='submit' className='btn-primary'>Add Work</button>
+   <button type='submit' disabled={isLoading} className='btn-primary'>{isLoading ? 'Add Working...':'Add Work'}</button>
  </form>
       )}
      

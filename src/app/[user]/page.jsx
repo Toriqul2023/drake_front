@@ -123,7 +123,7 @@ const Page = () => {
     <>
     {
       user?.email && (
-        <div className="fixed top-0 left-0 w-full bg-gray-800 text-white px-4 py-3 shadow-md flex justify-center items-center z-50">
+        <div className="fixed top-0 left-0 w-full bg-gray-800 text-white px-4 py-3 shadow-md flex justify-end items-center z-50">
            <Link href={`/contents/${uid}`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mr-2 transition duration-300">
           add contents
         </Link>
@@ -142,10 +142,10 @@ const Page = () => {
         />
       </video>
       
-      <div className={`row grid lg:grid-cols-4 grid-cols-1 px-5 ${user? 'mt-[100px]':''}`}>
+      <div className={`row grid lg:grid-cols-4 grid-cols-1 py-5 px-5 relative ${user? 'mt-[100px]':''}`}>
 
      
-<div className="pt-[50px]">
+<div className="py-[50px] ">
   <div className="lg:fixed border lg:w-[400px]  rounded-3xl pt-[50px] pb-[50px] px-[40px] border-[#565656]">
     <div className="flex justify-between items-center py-5">
       <h1 className="text-4xl">{profile[0]?.nickName}</h1>
@@ -153,7 +153,7 @@ const Page = () => {
     </div>
 
     <Image
-      className="rounded-3xl mb-[30px]"
+      className="rounded-3xl mb-[30px] w-[400px] h-[300px]"
       src={profile[0]?.image}
       unoptimized
       height={500}
@@ -169,14 +169,14 @@ const Page = () => {
       <ul className="grid grid-cols-4 w-[100%]  place-content-center my-[20px] gap-3">
         {profile[0]?.fbLink && (
           <li className=" flex items-center justify-center">
-            <a href={`${profile[0]?.fbLink}`}>
+            <a href={`https://${profile[0]?.fbLink}`}>
             <SocialIcon network="facebook"  size={20} />
             </a>
           </li>
         )}
         {profile[0]?.insta && (
           <li className=" flex items-center justify-center">
-            <a href={`${profile[0]?.insta}`}>
+            <a href={`https://${profile[0]?.insta}`}>
                  <SocialIcon network="instagram"  />
             </a>
           </li>
@@ -184,7 +184,7 @@ const Page = () => {
         {profile[0]?.twitter && (
           <li className="l flex items-center justify-center">
             
-            <a href={`${profile[0]?.twitter}`}>
+            <a href={`https://${profile[0]?.twitter}`}>
             <SocialIcon network="twitter"/>
             </a>
             
@@ -193,7 +193,7 @@ const Page = () => {
         {profile[0]?.linkedin && (
           <li className=" flex items-center justify-center">
            
-            <a href={`${profile[0]?.linkedin}`}>
+            <a href={`https://${profile[0]?.linkedin}`}>
             <SocialIcon network="linkedin" />
             </a>
             

@@ -10,7 +10,7 @@ import debounce from 'lodash.debounce';
 const Page = () => {
   const params = useParams();
   const { id } = params;
-
+  const [loadingUid, setLoadingUid] = useState(true);
   const { handleReg, updateName } = useContext(MyContext);
   const [error, setError] = useState('');
   const [uidExist, setUidExist] = useState(false);
@@ -40,6 +40,7 @@ const Page = () => {
           setError("UID already exists. Try another.");
         } else {
           setUidExist(false);
+          setLoadingUid(false);
           setError(''); // Clear error if UID is valid
         }
       } catch (err) {
@@ -123,6 +124,14 @@ const Page = () => {
     if (errors.userName) setFormError('userName', { type: 'manual', message: '' });
     setError(''); // Clear general error
   };
+  if (loadingUid) {
+    return (
+      <div className="preloader">
+        <div className="spinner"></div>
+        <div className="text-white text-center">Checking UID... Please wait.</div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-900">

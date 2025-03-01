@@ -11,8 +11,8 @@ config.autoAddCss = false;
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Toriqul Islam',
-  description: 'Toriqul, a mern stack developer',
+  title: 'NFC Bnagladesh',
+ 
 }
 
 export default function RootLayout({ children }) {

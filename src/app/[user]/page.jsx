@@ -153,7 +153,7 @@ const Page = () => {
     </div>
 
     <Image
-      className="rounded-3xl mb-[30px] w-[400px] h-[300px]"
+      className="rounded-3xl mb-[30px] "
       src={profile[0]?.image}
       unoptimized
       height={500}

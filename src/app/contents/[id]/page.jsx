@@ -206,7 +206,7 @@ const Page = () => {
 
   const checkCompletion = () => {
     if ((profileData  && introData && workData && projectData) || workData || projectData || educationData) {
-      const generatedLink = `https://nfc-rho-one.vercel.app/${id}`;
+      const generatedLink = `https://nfc-bangladesh.social/${id}`;
       setProfileLink(generatedLink);
       setIsModalOpen(true); 
     } else {
@@ -236,12 +236,12 @@ const Page = () => {
     <input className='input-field' {...registerProfile('address', { required: true })} placeholder='Enter Address' />
     <label htmlFor="">Facebook link</label>
     <input className='input-field' {...registerProfile('fbLink')} placeholder='Facebook Link' />
-    <label htmlFor="">Instagram link</label>
+    <label htmlFor="">Linkedin link</label>
     <input className='input-field' {...registerProfile('linkedin')} placeholder='LinkedIn Link' />
     <label htmlFor="">Instagram link</label>
     <input className='input-field' {...registerProfile('insta')} placeholder='Instagram Link' />
-    <label htmlFor="">Twitter link</label>
-    <input className='input-field' {...registerProfile('twitter')} placeholder='Twitter Link' />
+    <label htmlFor="">X link</label>
+    <input className='input-field' {...registerProfile('twitter')} placeholder='X Link' />
     <button type='submit' disabled={isLoading} className='btn-primary'>Submit Profile</button>
   </form>)
    }  

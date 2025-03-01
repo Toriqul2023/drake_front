@@ -126,10 +126,9 @@ const Page = () => {
   };
   if (loadingUid) {
     return (
-      <div className="preloader">
-        <div className="spinner"></div>
-        <div className="text-white text-center">Checking UID... Please wait.</div>
-      </div>
+      <div className="fixed inset-0 flex justify-center items-center bg-gray-900 bg-opacity-75 z-50">
+      <div className="spinner border-t-4 border-green-500 border-solid rounded-full w-12 h-12 animate-spin"></div>
+    </div>
     );
   }
 

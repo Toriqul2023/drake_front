@@ -344,8 +344,14 @@ const Page = () => {
     </form>)}
       
       <div className='flex justify-center my-2'>
-          <button onClick={prevStep} disabled={currentStep === 0} className='btn-secondary mr-2'>Previous</button>
-          <button onClick={nextStep} disabled={currentStep === stepTitles.length - 1} className='btn-primary'>Next</button>
+        {
+          currentStep >0 ? (<button onClick={prevStep} disabled={currentStep === 0} className='btn-secondary mr-2'>Previous</button>):''
+        }
+          
+          {
+            currentStep <4           ? (<button onClick={nextStep} disabled={currentStep === stepTitles.length - 1} className='btn-primary'>Next</button>):''
+          }
+          
         </div>
 
       {/* Toast container */}

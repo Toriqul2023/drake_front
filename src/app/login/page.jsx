@@ -24,7 +24,7 @@ const Login = () => {
     const res=await axios.get(`https://nfc-back-ngjs.onrender.com/login?emails=${data?.email}`)
       
         setTimeout(()=>{
-            router.push(`/${res.data}`);
+            router.push(`/${res.data.result?.uid}`);
         },1000)
          // Redirect immediately on success
      

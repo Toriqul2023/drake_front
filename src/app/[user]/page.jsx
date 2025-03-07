@@ -233,6 +233,7 @@ const Page = () => {
 </div>
 
 
+
 {/* Blur Effect & Form Popup */}
 {profileForm && (
 <div className="fixed p-5 top-0 left-0 w-full h-full bg-black bg-opacity-20 backdrop-blur-md flex items-center justify-center z-50">

@@ -29,10 +29,12 @@ import { ToastContainer, toast } from 'react-toastify'; // Import toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 import { SocialIcon } from 'react-social-icons'
 import Education from '../Components/Education/Education';
+import { Menu } from 'lucide-react';
 
 const Page = () => {
   const { user,handleSignOut } = useContext(MyContext);
   const [profileForm, setProfileForm] = useState(false);
+  const [open, setOpen] = useState(false);
   const params = useParams();
   const uid = params?.user;
   const [profile, setProfile] = useState([]);
@@ -121,19 +123,26 @@ const Page = () => {
 
   return (
     <>
-    {
-      user?.email && (
-        <div className="fixed top-0 left-0 w-full bg-gray-800 text-white px-4 py-3 shadow-md flex justify-end items-center z-50">
-           <Link href={`/contents/${uid}`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mr-2 transition duration-300">
-          add contents
-        </Link>
-     
-       
-      
+    
+    <div className="fixed top-0 left-0 w-full bg-gray-900 text-white px-6 py-4 shadow-lg flex justify-end items-center z-50">
+      <div className="relative">
+        <button
+          onClick={() => setOpen(!open)}
+          className="p-2 rounded-md bg-gray-800 hover:bg-gray-700 focus:outline-none"
+        >
+          <Menu size={24} />
+        </button>
+        {open && (
+          <div className="absolute right-0 mt-2 w-40 bg-gray-800 rounded-md shadow-md overflow-hidden">
+            <button className="block w-full text-left px-4 py-2 hover:bg-gray-700">Add Contents</button>
+            <button className="block w-full text-left px-4 py-2 hover:bg-gray-700">Log Out</button>
+          </div>
+        )}
       </div>
-      )
-    }
+    </div>
 
+     
+   
 
       <video className="body-overlay" loop muted autoPlay>
         <source

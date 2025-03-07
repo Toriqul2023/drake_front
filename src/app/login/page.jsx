@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { MyContext } from '../context/context';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import axios from 'axios';
 
 const Login = () => {
   const { handleLogin } = useContext(MyContext);
@@ -20,16 +21,13 @@ const Login = () => {
     setError('');
 
     await handleLogin(data?.email, data?.passwords)
-      .then(() => {
+    const res=await axios.get(`https://nfc-back-ngjs.onrender.com/login?emails=${data?.email}`)
+      
         setTimeout(()=>{
-            router.push('/contents');
-        },2000)
+            router.push(`/${res.data}`);
+        },1000)
          // Redirect immediately on success
-      })
-      .catch(err => {
-        console.log("Login failed");
-        setError(err.code);
-      });
+     
   };
 
   return (

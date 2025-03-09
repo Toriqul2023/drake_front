@@ -179,14 +179,14 @@ const Page = () => {
       <ul className="grid grid-cols-4 w-[100%]  place-content-center my-[20px] gap-3">
         {profile[0]?.fbLink && (
           <li className=" flex items-center justify-center">
-            <a href={`https://${profile[0]?.fbLink}`}>
+            <a href={`${profile[0]?.fbLink}`}>
             <SocialIcon network="facebook"  size={20} />
             </a>
           </li>
         )}
         {profile[0]?.insta && (
           <li className=" flex items-center justify-center">
-            <a href={`https://${profile[0]?.insta}`}>
+            <a href={`${profile[0]?.insta}`}>
                  <SocialIcon network="instagram"  />
             </a>
           </li>
@@ -194,7 +194,7 @@ const Page = () => {
         {profile[0]?.twitter && (
           <li className="l flex items-center justify-center">
             
-            <a href={`https://${profile[0]?.twitter}`}>
+            <a href={`${profile[0]?.twitter}`}>
             <SocialIcon network="twitter"/>
             </a>
             
@@ -203,7 +203,7 @@ const Page = () => {
         {profile[0]?.linkedin && (
           <li className=" flex items-center justify-center">
            
-            <a href={`https://${profile[0]?.linkedin}`}>
+            <a href={`${profile[0]?.linkedin}`}>
             <SocialIcon network="linkedin" />
             </a>
             

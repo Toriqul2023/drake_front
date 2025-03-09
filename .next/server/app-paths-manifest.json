@@ -1,4 +1,7 @@
 {
+  "/page": "app/page.js",
   "/[user]/page": "app/[user]/page.js",
-  "/login/page": "app/login/page.js"
+  "/login/page": "app/login/page.js",
+  "/contents/[id]/page": "app/contents/[id]/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }

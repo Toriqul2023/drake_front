@@ -134,7 +134,7 @@ const Page = () => {
         </button>
         {open && (
           <div className="absolute right-0 mt-2 w-40 bg-gray-800 rounded-md shadow-md overflow-hidden">
-           {user?.email ? (<button className="block w-full text-left px-4 py-2 hover:bg-gray-700">Add Contents</button>):''} 
+           {user?.email ? (<Link href={`/contents/${uid}`}><button className="block w-full text-left px-4 py-2 hover:bg-gray-700">Add Contents</button></Link>):''} 
           {user?.email ? (<button onClick={handleSignOut} className="block w-full text-left px-4 py-2 hover:bg-gray-700">Log Out</button>):
           <button className="block w-full text-left px-4 py-2 hover:bg-gray-700"><Link href={'/login'}>Log In</Link></button>}  
           </div>

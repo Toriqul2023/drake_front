@@ -20,14 +20,29 @@ const Login = () => {
   const onSubmit = async (data) => {
     setError('');
 
-    await handleLogin(data?.email, data?.passwords)
-    const res=await axios.get(`https://nfc-back-ngjs.onrender.com/login?emails=${data?.email}`)
-      
-        setTimeout(()=>{
-            router.push(`/${res.data.result?.uid}`);
-        },1000)
-         // Redirect immediately on success
-     
+    try {
+      // Wait for login to complete
+      await handleLogin(data?.email, data?.passwords);
+
+      // Send API request
+      const res = await axios.post(`https://nfc-back-2.onrender.com/login`, { emails: data?.email });
+
+      // Ensure response has data
+      if (res.data?.result?.length === 0) {
+        throw new Error("Invalid response from server");
+      }
+
+      // Get UID and redirect
+      const link = res.data.result[0]?.uid;
+      if (link) {
+        router.push(`/${link}`);
+      } else {
+        throw new Error("UID not found");
+      }
+    } catch (err) {
+      console.error("Login Error:", err.message);
+      setError("Login failed. Please check your credentials.");
+    }
   };
 
   return (
@@ -68,15 +83,11 @@ const Login = () => {
             className="w-full bg-green-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition-all">
             Login
           </button>
-        
         </form>
+
         <Link className='text-blue-600 my-2 block' href={'/reg'}> 
-          
-          Don't have any account?
-          
-          
-         </Link>
-        
+          Don't have an account?
+        </Link>
       </div>
     </div>
   );

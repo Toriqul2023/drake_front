@@ -152,7 +152,7 @@ const Page = () => {
         />
       </video>
       
-      <div className={`row grid lg:grid-cols-4 grid-cols-1 py-5 px-5 relative mt-[100px]`}>
+      <div className={`row grid lg:grid-cols-4 grid-cols-1 py-5 px-5 relative lg:mt-[100px]`}>
 
      
 <div className="py-[50px] ">

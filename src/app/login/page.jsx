@@ -7,8 +7,12 @@ import Link from 'next/link';
 import axios from 'axios';
 
 const Login = () => {
-  const { handleLogin } = useContext(MyContext);
+  const { handleLogin,passReset } = useContext(MyContext);
   const [error, setError] = useState('');
+  const [resetActive,setResetActive]=useState(false)
+  const [showReset, setShowReset] = useState(false);
+const [resetEmail, setResetEmail] = useState('');
+const [resetMessage, setResetMessage] = useState('');
   const router = useRouter();
 
   const {
@@ -16,7 +20,9 @@ const Login = () => {
     handleSubmit,
     formState: { errors }
   } = useForm();
-
+  const handlePassReset=()=>{
+    passReset()
+  }
   const onSubmit = async (data) => {
     setError('');
 
@@ -88,6 +94,43 @@ const Login = () => {
         <Link className='text-blue-600 my-2 block' href={'/reg'}> 
           Don't have an account?
         </Link>
+    {/* Forgot Password Option */}
+ <div className="mt-4 text-center">
+  {!showReset ? (
+    <button
+      onClick={() => setShowReset(true)}
+      className="text-blue-400 hover:underline"
+    >
+      Forgot password?
+    </button>
+  ) : (
+    <div className="mt-4">
+      <input
+        type="email"
+        value={resetEmail}
+        onChange={(e) => setResetEmail(e.target.value)}
+        placeholder="Enter your email"
+        className="w-full p-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button
+        onClick={async () => {
+          if (!resetEmail) return setResetMessage("Please enter your email");
+          try {
+            await passReset(resetEmail);
+            setResetMessage("Reset link sent to your email.");
+          } catch (err) {
+            setResetMessage("Failed to send reset link.");
+          }
+        }}
+        className="w-full mt-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded-md"
+      >
+        Send Reset Link
+      </button>
+      {resetMessage && <p className="text-sm text-center text-green-400 mt-2">{resetMessage}</p>}
+    </div>
+  )}
+</div> 
+
       </div>
     </div>
   );

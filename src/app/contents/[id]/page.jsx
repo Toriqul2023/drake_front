@@ -254,11 +254,13 @@ const Page = () => {
         currentStep == 1 &&(
           <form onSubmit={handleSubmitIntro(onSubmitIntro)} className=''>
           <h2 className='text-lg font-medium mb-2'>Introduce yourself </h2>
+          <label htmlFor="">Nickname</label>
           <input className='input-field' {...registerIntro('heading', { required: true })} placeholder='Enter Your nickname' />
+          <label htmlFor="">Short description</label>
           <textarea className='input-field h-32 w-[100%]' {...registerIntro('metaInfo', { required: true })} placeholder='Write a short introduction about yourself' />
-         <label htmlFor="">optional</label>
+         <label htmlFor="">Year's of experience-optional</label>
           <input className='input-field' {...registerIntro('experience', )} placeholder='Years of experience' />
-          <label htmlFor="">optional</label>
+          <label htmlFor="">Number of projects-optional</label>
           <input className='input-field' {...registerIntro('projects',)} placeholder='Enter how many projects you have completed' />
           <div className='flex gap-2'>
             <button type='submit' className='btn-primary'>Submit</button>

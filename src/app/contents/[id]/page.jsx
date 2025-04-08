@@ -276,7 +276,9 @@ const Page = () => {
       
   <h3 className='text-lg font-medium mb-2'>Education Experience</h3>
   <label className='text-white my-4'>You can add multiple eduaction's experience </label>
+  <label htmlFor="">Starting year</label>
   <input className='input-field' {...registerEducation('startDate', { required: true })} placeholder='Starting Year' />
+  <label htmlFor="">Passing year</label>
   <input 
   className="input-field" 
   {...registerEducation('endDate', { required: !isPresent })} 
@@ -294,7 +296,9 @@ const Page = () => {
      className="h-5 w-5 text-blue-500"
   />
 </div>
+<label htmlFor="">Type your Institution</label>
   <input className='input-field' {...registerEducation('institution',)} placeholder='Enter your institution name' />
+  <label htmlFor="">Type your Degree</label>
   <input className='input-field' {...registerEducation('degree',)} placeholder='Enter your degree' />
   <button type='submit' className='btn-primary'>Add Education</button>
 </form>)
@@ -307,7 +311,9 @@ const Page = () => {
  <label className='text-yellow-500' htmlFor="">* If you don't have any work experience. No need to fullfill the form*</label>
    <h3 className='text-lg font-medium mb-2'>Work Experience</h3>
    <label className='text-white my-4'>You can add multiple work experience </label>
+   <label htmlFor="">Starting year</label>
    <input className='input-field' {...registerWork('sYear', { required: true })} placeholder='Start Year' />
+   <label htmlFor="">End year</label>
    <input 
    className="input-field" 
    {...registerWork('lYear', { required: !isPresent })} 
@@ -325,7 +331,9 @@ const Page = () => {
       className="h-5 w-5 text-blue-500"
    />
  </div>
+ <label htmlFor="">Type your designation</label>
    <input className='input-field' {...registerWork('designation',)} placeholder='Designation' />
+   <label htmlFor="">Type your company name</label>
    <input className='input-field' {...registerWork('company',)} placeholder='Company Name' />
    <button type='submit' disabled={isLoading} className='btn-primary'>{isLoading ? 'Add Working...':'Add Work'}</button>
  </form>
@@ -338,9 +346,11 @@ const Page = () => {
       <label className='text-yellow-500' htmlFor="">* If you don't have any projects. No need to fullfill the form</label>
       <h2 className='text-lg font-medium '>Project</h2>
       <label className='my-4 ' htmlFor="">You can add multiple projects</label>
+      <label htmlFor="">Give a project title</label>
       <input className='input-field' {...registerProject('title', )} placeholder='Enter a project title' />
-      <label htmlFor=""></label>
+      <label htmlFor="">Describe your project</label>
       <textarea className='input-field' {...registerProject('description', )} placeholder='Describe your  project' />
+      <label htmlFor="">Enter yor project link</label>
       <input className='input-field' {...registerProject('link',)} placeholder='Project Link' />
       <button type='submit' className='btn-primary'>Add Project</button>
     </form>)}

@@ -34,7 +34,7 @@ const Education = ({uid}) => {
       // ✅ Pre-fill form with existing values when opening
       if (!updatedForm[id]) {
         reset({
-          ininstitution: educationData?.institution || '',
+          institution: educationData?.institution || '',
           degree: educationData?.degree || '',
           startDate:educationData?.startDate || '',
           endDate:educationData?.endDate ||'',
@@ -44,7 +44,7 @@ const Education = ({uid}) => {
   
     const onSubmitUpdate = (data, id) => {
       const updateField={}
-      if(data?.institution?.trim()) updateField.ininstitution=data.ininstitution
+      if(data?.institution?.trim()) updateField.institution=data.institution
       if(data?.degree?.trim()) updateField.degree=data.degree
       if(data?.startDate?.trim()) updateField.startDate=data.startDate
       if(data?.endDate?.trim()) updateField.endDate=data.endDate

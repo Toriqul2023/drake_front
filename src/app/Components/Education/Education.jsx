@@ -66,7 +66,7 @@ const Education = ({uid}) => {
                       onClick={() => toggleUpdateForm(education._id, education)} 
                       className="bg-[#16A34A] text-white px-4 my-4 py-2 rounded"
                     >
-                      {updatedForm[education._id] ? "Hide Update Form" : "Edit your job experience"}
+                      {updatedForm[education._id] ? "Hide Update Form" : "Edit your education"}
                     </button>
   
                     {updatedForm[education._id] && (

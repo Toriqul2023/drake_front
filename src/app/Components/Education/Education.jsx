@@ -13,7 +13,17 @@ const Education = ({uid}) => {
       axios.get(`https://nfc-back-2.onrender.com/education?uid=${uid}`)
         .then(res => seteducations(res.data?.result))
     }, [uid]) 
-  
+   
+
+    const toggleDelete=(_id)=>{
+      const confirmed = window.confirm("Are you sure you want to delete this portion?");
+      if (!confirmed) return;
+      axios.delete(`https://nfc-back-2.onrender.com/education/${_id}`)
+      .then(()=>{
+
+      })
+
+    }
     const toggleUpdateForm = (id, educationData) => {
       setUpdatedForm(prev => ({
         ...prev,
@@ -33,7 +43,7 @@ const Education = ({uid}) => {
   
     const onSubmitUpdate = (data, id) => {
       const updateField={}
-      if(data?.ininstitution?.trim()) updateField.ininstitution=data.ininstitution
+      if(data?.institution?.trim()) updateField.ininstitution=data.ininstitution
       if(data?.degree?.trim()) updateField.degree=data.degree
       if(data?.startDate?.trim()) updateField.startDate=data.startDate
       if(data?.endDate?.trim()) updateField.endDate=data.endDate
@@ -67,6 +77,12 @@ const Education = ({uid}) => {
                       className="bg-[#16A34A] text-white px-4 my-4 py-2 rounded"
                     >
                       {updatedForm[education._id] ? "Hide Update Form" : "Edit your education"}
+                    </button>
+                    <button 
+                      onClick={() => toggleDelete(education._id)} 
+                      className="bg-red-500 ml-5 text-white px-4 my-4 py-2 rounded"
+                    >
+                      Delete
                     </button>
   
                     {updatedForm[education._id] && (
